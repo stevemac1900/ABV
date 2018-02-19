@@ -13,8 +13,6 @@ while True:
     try:
         get_beer_data()
         time.sleep(3600)
-        print("waiting...")
     except:
-        print("WHOOPSIE")
         time.sleep(3600)
         continue
