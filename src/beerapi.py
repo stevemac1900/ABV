@@ -1,13 +1,13 @@
-import datetime
 import requests
+import datetime
 import time
 
 def get_beer_data():
-    result = requests.get("http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv")
+    beer_inventory = requests.get('http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv')
     filename = str(datetime.datetime.now()).replace(' ', '_') + '.csv'
-    with open(filename, "w") as outfile:
-        for line in result.text:
-            outfile.write(line)
+    beer_inventory_file = open(filename, "w+")
+    beer_inventory_file.write(beer_inventory.text)
+    time.sleep(3600)
 
 while True:
     try:
