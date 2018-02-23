@@ -1,6 +1,7 @@
 import requests
 import datetime
 import time
+import logging
 
 def get_beer_data():
     """
@@ -17,10 +18,33 @@ def get_beer_data():
     beer_inventory_file = open(filename, "w+")
     beer_inventory_file.write(beer_inventory.text)
 
-while True:
-    try:
-        get_beer_data()
-    except:
-        pass
 
-    time.sleep(3600)
+
+def go():
+    """
+    Fetches beer data every 20 minutes
+
+    Input:
+        Parameterless
+
+    Output:
+        Returns void
+
+    Raises:
+        Exception
+            When unable to fetch file, logs error and passes
+    """
+    while True:
+        try:
+            get_beer_data()
+            logging.info('The data was fetched successfully!')
+            time.sleep(1200)
+        except:
+            logging.exception('Failed to fetch file:')
+            time.sleep(1200)
+            pass
+
+if __name__ == "__main__":
+    logging.basicConfig(filename='test.log', level=logging.INFO, format='%(asctime)s:%(message)s')
+    go()
+
