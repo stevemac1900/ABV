@@ -2,17 +2,20 @@ import requests
 import datetime
 import time
 
-def get_beer_data():
+def write_beer_inventory():
     beer_inventory = requests.get('http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv')
     filename = str(datetime.datetime.now()).replace(' ', '_') + '.csv'
-    beer_inventory_file = open(filename, "w+")
-    beer_inventory_file.write(beer_inventory.text)
-    time.sleep(3600)
+    with open(filename, "w+") as beer_inventory_file:
+        beer_inventory_file.write(beer_inventory.text)
 
-while True:
-    try:
-        get_beer_data()
-        time.sleep(3600)
-    except:
-        time.sleep(3600)
-        continue
+
+def run():
+    while True:
+        try:
+            write_beer_inventory()
+        except:
+            pass
+        time.sleep(1200)
+
+if __name__ == "__main__":
+    run()
