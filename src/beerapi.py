@@ -47,5 +47,5 @@ def run():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(filename='test.log', level=logging.INFO, format='%(asctime)s:%(message)s')
+    logging.basicConfig(filename='abv.log', level=logging.INFO, format='%(asctime)s:%(message)s')
     run()
