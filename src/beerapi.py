@@ -34,6 +34,7 @@ def run():
     Output:
         Returns void
     """
+    seconds_between_fetches = 1200
 
     while True:
         try:
@@ -43,7 +44,7 @@ def run():
         except:
             logging.exception('Failed to fetch file:')
             pass
-        time.sleep(1200)
+        time.sleep(seconds_between_fetches)
 
 
 if __name__ == "__main__":
