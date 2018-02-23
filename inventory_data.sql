@@ -23,5 +23,5 @@ CREATE TABLE purchasing_details(
 )
 
 -- Rename fields
-CREATE INDEX AUTHOR_INDEX
+CREATE INDEX DATETIME_INDEX
 ON Inventory_availability(dt);
