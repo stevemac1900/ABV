@@ -20,11 +20,6 @@ while True:
     except requests.exceptions.ConnectionError as err:
         error = str(err).split(':')
         arrayLen = len(error)
-        error_msg = "Connection Error(" + error[arrayLen - 2][1:] + ":" + error[arrayLen - 1][:-4] + ")"
+        error_msg = format(type(err).__name__) + " " + error[arrayLen - 2][1:] + ":" + error[arrayLen - 1][:-4] + ")"
         logging.warning(error_msg)
         time.sleep(3600)
-    """"        
-    except exe:
-        time.sleep(3600)
-        continue
-    """
