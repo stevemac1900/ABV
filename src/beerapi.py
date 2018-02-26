@@ -1,6 +1,8 @@
 import requests
 import datetime
 import time
+import logging
+logging.basicConfig(filename='connection.log',level=logging.DEBUG)
 
 def get_beer_data():
     beer_inventory = requests.get('http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv')
@@ -13,6 +15,16 @@ while True:
     try:
         get_beer_data()
         time.sleep(3600)
-    except:
+
+
+    except requests.exceptions.ConnectionError as err:
+        error = str(err).split(':')
+        arrayLen = len(error)
+        error_msg = "Connection Error(" + error[arrayLen - 2][1:] + ":" + error[arrayLen - 1][:-4] + ")"
+        logging.warning(error_msg)
+        time.sleep(3600)
+    """"        
+    except exe:
         time.sleep(3600)
         continue
+    """
