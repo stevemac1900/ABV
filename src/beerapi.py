@@ -2,8 +2,6 @@ import requests
 import datetime
 import time
 import logging
-
-
 def write_beer_inventory():
     """
     Retrieves inventory data from Tanczos and writes to file locally
@@ -30,7 +28,12 @@ def write_beer_inventory():
         logging.exception('Failed to fetch file: {}'.format(error_subclass))
         pass
 
-
+    except requests.exceptions.ConnectionError as err:
+        error = str(err).split(':')
+        arrayLen = len(error)
+        error_msg = format(type(err).__name__) + " " + error[arrayLen - 2][1:] + ":" + error[arrayLen - 1][:-4] + ")"
+        logging.warning(error_msg)
+        pass
 def run():
     """
     Runs write_beer_inventory every 20 minutes
