@@ -48,11 +48,8 @@ def run():
             write_beer_inventory()
             logging.info('The data was fetched successfully!')
         except requests.exceptions.ConnectionError as err:
-            error = str(err).split(':')
-            arrayLen = len(error)
-            error_msg = format(type(err).__name__) + " " + error[arrayLen - 2][1:] + ":" + error[arrayLen - 1][
-                                                                                           :-4] + ")"
-            logging.warning(error_msg)
+            logging.exception("Connection Error")
+            pass
         except:
             logging.exception('Failed to fetch file:')
             pass
