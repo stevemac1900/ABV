@@ -9,7 +9,7 @@ def write_beer_inventory():
     Retrieves inventory data from Tanczos and writes to file locally
 
     Input:
-        Parameterless
+        None
 
     Output:
         Returns void
@@ -18,10 +18,17 @@ def write_beer_inventory():
     Exception
         When unable to fetch file, logs error and passes
     """
-    beer_inventory = requests.get('http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv')
-    filename = str(datetime.datetime.now()).replace(' ', '_') + '.csv'
-    with open(filename, "w+") as beer_inventory_file:
-        beer_inventory_file.write(beer_inventory.text)
+    try:
+        beer_inventory = requests.get('http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv')
+        filename = str(datetime.datetime.now()).replace(' ', '_') + '.csv'
+        with open(filename, "w+") as beer_inventory_file:
+            beer_inventory_file.write(beer_inventory.text)
+        logging.info('The data was fetched successfully!')
+
+    except (OSError, requests.exceptions.ConnectionError) as e:
+        error_subclass = type(e).__name__
+        logging.exception('Failed to fetch file: {}'.format(error_subclass))
+        pass
 
 
 def run():
@@ -29,7 +36,7 @@ def run():
     Runs write_beer_inventory every 20 minutes
 
     Input:
-        Parameterless
+        None
 
     Output:
         Returns void
@@ -37,13 +44,7 @@ def run():
     seconds_between_fetches = 1200
 
     while True:
-        try:
-            write_beer_inventory()
-            logging.info('The data was fetched successfully!')
-
-        except:
-            logging.exception('Failed to fetch file:')
-            pass
+        write_beer_inventory()
         time.sleep(seconds_between_fetches)
 
 
