@@ -1,8 +1,5 @@
 from FilterDS import FilterDS
 
-def test_initialization():
-    filter = FilterDS()
-
 def test_filter_with_no_filters():
     filter = FilterDS()
     assert None == filter.package
