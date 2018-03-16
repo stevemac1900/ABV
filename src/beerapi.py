@@ -44,7 +44,7 @@ def run():
     seconds_between_fetches = 1200
 
     while True:
-
+        write_beer_inventory()
         time.sleep(seconds_between_fetches)
 
 
