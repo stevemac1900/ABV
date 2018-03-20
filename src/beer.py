@@ -20,10 +20,10 @@ class Beer:
         return self.price
 
     def get_quantity(self):
-        return self.get_quantity()
+        return self.quantity
 
     def is_available(self):
-        if self.get_quantity() > 0:
+        if int(self.get_quantity()) > 0:
             return True
         else:
             return False
