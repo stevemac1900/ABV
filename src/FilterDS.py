@@ -1,5 +1,5 @@
 
 class FilterDS:
-    def __init__(self, package=None, style=None):
-        self.package = package
+    def __init__(self, size=None, style=None):
+        self.size = size
         self.style = style
