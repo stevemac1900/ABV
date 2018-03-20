@@ -12,3 +12,10 @@ def test_beer_attributes():
 def test_non_available_beer():
     b = Beer("Natty Light", "24/12 OZ. CAN", "College", "20.00", "0")
     assert b.is_available() == False
+    assert b.get_quantity() == "0"
+
+
+def test_negative_quantity_beer():
+    b = Beer("Lionshead", "24/12 OZ. CAN", "Pilsner", "30.00", "-1")
+    assert b.is_available() == False
+    assert b.get_quantity() == "-1"
