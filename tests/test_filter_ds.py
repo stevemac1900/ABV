@@ -1,4 +1,4 @@
-from src.FilterDS import FilterDS
+from FilterDS import FilterDS
 
 def test_filter_with_no_filters():
     filter = FilterDS()

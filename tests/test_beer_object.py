@@ -1,4 +1,4 @@
-from src.beer import Beer
+from beer import Beer
 
 def test_beer_attributes():
     b = Beer("Guinness", "12/12 OZ. BTL", "Stout", "30.00", "2")
