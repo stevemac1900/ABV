@@ -1,9 +1,9 @@
 class AvailabilityFilter:
-    def __init__(self, subfilter, availability):
-        self.subfilter = subfilter
-        self.availability = availability
+    def __init__(self, subfilter, quantity_available):
+        self.sf = subfilter
+        self.qa = quantity_available
 
     def is_match(self, beer):
-        if beer.is_available != self.availability:
+        if self.qa < 1:
             return False
-        return self.subfilter.is_match(beer)
+        return self.sf.is_match(beer)
