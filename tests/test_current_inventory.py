@@ -3,6 +3,7 @@ from inventory import Inventory
 
 import pytest
 
+base_dir = 'tests/sample_csv_files/'
 
 def make_beer(quantity):
     return {'name': 'Bells Best Brown',
@@ -13,7 +14,6 @@ def make_beer(quantity):
 
 
 def make_queries(filename):
-    base_dir = 'sample_csv_files/'
     return InventoryQueries(Inventory(base_dir + filename))
 
 
