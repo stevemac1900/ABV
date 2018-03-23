@@ -1,4 +1,4 @@
-from yes_filter import YesFilter
+from src.yes_filter import YesFilter
 
 
 def test_is_match_is_true():

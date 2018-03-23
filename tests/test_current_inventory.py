@@ -1,5 +1,5 @@
-from available_inventory import InventoryQueries
-from inventory import Inventory
+from src.available_inventory import InventoryQueries
+from src.inventory import Inventory
 
 import pytest
 
