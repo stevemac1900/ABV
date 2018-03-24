@@ -3,7 +3,13 @@ from beer import Beer
 from yes_filter import YesFilter
 
 
-def test_name_filter_match():
-    test_beer = Beer("Guinness", "pint", "stout", "5", "5")
-    fltr = SizeFilter(YesFilter(), "pint")
-    assert fltr.is_match(test_beer) is True
+def test_size_filter_match():
+    b = Beer('bud', '1/2 keg', 'lager', '2.00', '1.00')
+    f = SizeFilter(YesFilter(), '1/2 keg')
+    assert f.is_match(b) is True
+
+
+def test_size_filter_no_match():
+    b = Beer('bud', '1/2 keg', 'lager', '2.00', '1.00')
+    f = SizeFilter(YesFilter(), 'pint')
+    assert f.is_match(b) is False
