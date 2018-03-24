@@ -4,6 +4,6 @@ from yes_filter import YesFilter
 
 
 def test_name_filter_match():
-    test_beer = Beer("Guinness", "pint", "stout", "5")
+    test_beer = Beer("Guinness", "pint", "stout", "5", "5")
     fltr = SizeFilter(YesFilter(), "pint")
     assert fltr.is_match(test_beer) is True

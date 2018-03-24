@@ -21,4 +21,3 @@ def test_quantity_filter_zero_value():
 
 def test_quantity_filter_negative_value():
     assert get_test_filter(-5).is_match(get_test_beer(-5)) is False
-
