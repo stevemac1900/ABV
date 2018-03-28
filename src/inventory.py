@@ -1,4 +1,6 @@
-
+"""
+    This module is for the Inventory of the beer
+"""
 import csv
 
 
@@ -15,6 +17,9 @@ def convert_to_numeric(item):
 
 
 class Inventory:
+    """
+        This Class initiates an inventory
+    """
     def __init__(self, filename):
         with open(filename) as csvfile:
             reader = csv.DictReader(csvfile,
@@ -25,4 +30,3 @@ class Inventory:
 
     def get_historic_inventory(self):
         return self.inventory
-
