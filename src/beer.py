@@ -1,10 +1,11 @@
 class Beer:
 
-    def __init__(self, name, size, style, price):
+    def __init__(self, name, size, style, price, quantity):
         self.name = name
         self.size = size
         self.style = style
         self.price = price
+        self.quantity = quantity
 
     def get_name(self):
         return self.name
@@ -17,3 +18,14 @@ class Beer:
 
     def get_price(self):
         return self.price
+
+    def get_quantity(self):
+        return self.quantity
+
+    def is_available(self):
+        if float(self.get_quantity()) > 0.0:
+            return True
+        else:
+            return False
+
+
