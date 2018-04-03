@@ -347,14 +347,14 @@ argument-naming-style=snake_case
 
 # Regular expression matching correct argument names. Overrides argument-
 # naming-style
-argument-rgx='[a-z\_][a-z0-9\_]{2,100}$'
+#argument-rgx=
 
 # Naming style matching correct attribute names
 attr-naming-style=snake_case
 
 # Regular expression matching correct attribute names. Overrides attr-naming-
 # style
-#attr-rgx='[a-z\_][a-z0-9\_]{2,100}$'
+#attr-rgx=
 
 # Bad variable names which should always be refused, separated by a comma
 bad-names=foo,
@@ -393,7 +393,7 @@ function-naming-style=snake_case
 
 # Regular expression matching correct function names. Overrides function-
 # naming-style
-#function-rgx='[a-z\_][a-z0-9\_]{2,100}$'
+function-rgx=[a-z0-9_]{1,100}
 
 # Good variable names which should always be accepted, separated by a comma
 good-names=i,
@@ -418,7 +418,7 @@ method-naming-style=snake_case
 
 # Regular expression matching correct method names. Overrides method-naming-
 # style
-#method-rgx='[a-z\_][a-z0-9\_]{2,100}$'
+#method-rgx=
 
 # Naming style matching correct module names
 module-naming-style=snake_case
@@ -444,7 +444,7 @@ variable-naming-style=snake_case
 
 # Regular expression matching correct variable names. Overrides variable-
 # naming-style
-#variable-rgx=
+variable-rgx=[a-z0-9_]{1,100}
 
 
 [IMPORTS]
