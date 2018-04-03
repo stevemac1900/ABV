@@ -26,6 +26,6 @@ class Beer:
 
     def is_available(self):
         ''' Returns: whether the beer is available in stock '''
-        if int(self.get_quantity()) > 0:
+        if float(self.get_quantity()) > 0.0:
             return True
         return False
