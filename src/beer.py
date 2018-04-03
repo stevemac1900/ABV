@@ -23,7 +23,7 @@ class Beer:
         return self.quantity
 
     def is_available(self):
-        if int(self.get_quantity()) > 0:
+        if float(self.get_quantity()) > 0.0:
             return True
         else:
             return False
