@@ -1,5 +1,6 @@
-"""This file tests the filter data structure"""
-from FilterDS import FilterDS
+
+from filter_ds import FilterDS
+
 
 def test_filter_with_no_filters():
     ds_filter = FilterDS()
