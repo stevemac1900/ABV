@@ -2,3 +2,4 @@ pytest
 pylint
 requests
 requests_mock
+pytest-cov
