@@ -16,6 +16,7 @@ def expected_exception_on_read(request):
         session.get(TANCZOS_INVENTORY, exc=request.param)
         yield request.param
 
+
 # pylint: disable=redefined-outer-name, unused-argument
 def test_connection_exceptions_on_read(expected_exception_on_read):
     assert beerapi.get_inventory() == ""
@@ -26,6 +27,7 @@ def expected_exception_on_write(request):
     with requests_mock.Mocker() as session:
         session.get(TANCZOS_INVENTORY, exc=request.param)
         yield request.param
+
 
 # pylint: disable=redefined-outer-name
 def test_exception_on_write(expected_exception_on_write):

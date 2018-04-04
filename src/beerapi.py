@@ -5,9 +5,8 @@ import requests
 
 
 def write_beer_inventory():
-    """
-    Retrieves inventory data from Tanczos and writes to file locally
-    """
+    """ Retrieves inventory data from Tanczos and writes to file locally """
+
     beer_inventory = get_inventory()
     if beer_inventory != "":
         write_inventory(beer_inventory)
@@ -27,9 +26,8 @@ def write_inventory(beer_inventory):
 
 
 def get_inventory():
-    """
-    Returns: The inventory or an emtpy string if the communication failed.
-    """
+    """ Returns: The inventory or an emtpy string if the communication failed. """
+
     beer_file = 'http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv'
     try:
         beer_inventory = requests.get(beer_file)
@@ -50,6 +48,7 @@ def run():
     Output:
         Returns void
     """
+
     seconds_between_fetches = 1200
 
     while True:
