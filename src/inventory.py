@@ -1,4 +1,3 @@
-
 import csv
 
 
@@ -25,4 +24,3 @@ class Inventory:
 
     def get_historic_inventory(self):
         return self.inventory
-
