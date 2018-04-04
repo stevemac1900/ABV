@@ -12,8 +12,4 @@ node
     {
         sh 'pylint src/abv/*.py tests/*.py'
     }
-    stage('Coverage')
-    {
-        sh 'pytest --cov=abv --cov-fail-under=90'
-    }
 }
