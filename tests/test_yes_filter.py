@@ -1,7 +1,7 @@
 """
  This test is for the purpose of testing the object YesFilter
 """
-from yes_filter import YesFilter
+from abv.yes_filter import YesFilter
 
 
 def test_is_match_is_true():

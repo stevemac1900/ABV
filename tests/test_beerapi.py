@@ -5,7 +5,7 @@
 import pytest
 import requests
 import requests_mock
-import beerapi as beerapi
+import abv.beerapi as beerapi
 
 TANCZOS_INVENTORY = 'http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv'
 

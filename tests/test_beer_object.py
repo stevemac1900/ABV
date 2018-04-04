@@ -1,7 +1,7 @@
 """
     This Module is for the purpose of testing the beer object and its functionality
 """
-from beer import Beer
+from abv.beer import Beer
 
 
 def test_beer_attributes():

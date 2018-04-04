@@ -1,4 +1,4 @@
-from beer import Beer
+from abv.beer import Beer
 
 
 def keep_requested_attributes(beer):

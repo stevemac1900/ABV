@@ -1,8 +1,9 @@
 import pytest
-from inventory import Inventory
+from abv.inventory import Inventory
 
 
 BASE_DIR = 'tests/sample_csv_files/'
+
 
 def inventory_has_proper_size(filename, size):
     i = Inventory(BASE_DIR + filename)
