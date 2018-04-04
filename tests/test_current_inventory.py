@@ -1,4 +1,3 @@
-
 from abv.available_inventory import InventoryQueries
 from abv.inventory import Inventory
 

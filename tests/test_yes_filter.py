@@ -1,6 +1,3 @@
-"""
- This test is for the purpose of testing the object YesFilter
-"""
 from abv.yes_filter import YesFilter
 
 

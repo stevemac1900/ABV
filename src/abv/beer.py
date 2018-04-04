@@ -1,10 +1,6 @@
-''' File containing class for Beer object '''
-
-
 class Beer:
     # pylint: disable=too-many-arguments
     def __init__(self, name, size, style, price, quantity):
-        ''' initialize the beer object and its attributes '''
         self.name = name
         self.size = size
         self.style = style
@@ -27,7 +23,6 @@ class Beer:
         return self.quantity
 
     def is_available(self):
-        ''' Returns: whether the beer is available in stock '''
         if float(self.get_quantity()) > 0.0:
             return True
         return False
