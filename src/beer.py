@@ -1,6 +1,8 @@
 ''' File containing class for Beer object '''
-class Beer:
 
+
+class Beer:
+    # pylint: disable=too-many-arguments
     def __init__(self, name, size, style, price, quantity):
         ''' initialize the beer object and its attributes '''
         self.name = name
