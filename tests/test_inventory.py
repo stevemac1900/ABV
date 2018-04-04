@@ -3,6 +3,7 @@ from inventory import Inventory
 import pytest
 
 base_dir = 'tests/sample_csv_files/'
+
 def inventory_has_proper_size(filename, size):
     i = Inventory(base_dir + filename)
     assert size == len(i.get_historic_inventory())

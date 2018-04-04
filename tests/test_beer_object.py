@@ -5,6 +5,7 @@ from beer import Beer
 
 
 def test_beer_attributes():
+
     beer_attribute = Beer("Guinness", "12/12 OZ. BTL", "Stout", "30.00", "2")
     assert beer_attribute.get_name() == "Guinness"
     assert beer_attribute.get_size() == "12/12 OZ. BTL"
@@ -24,3 +25,4 @@ def test_negative_quantity_beer():
     negative_beer = Beer("Lionshead", "24/12 OZ. CAN", "Pilsner", "30.00", "-1")
     assert negative_beer.is_available() is False
     assert negative_beer.get_quantity() == "-1"
+

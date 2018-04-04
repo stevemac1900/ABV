@@ -1,7 +1,7 @@
 import pytest
 import requests
 import requests_mock
-import src.beerapi as beerapi
+import beerapi as beerapi
 
 
 @pytest.fixture(params= [requests.exceptions.ConnectTimeout, requests.exceptions.ConnectionError])

@@ -1,3 +1,6 @@
+"""
+ This test is for the purpose of testing the object YesFilter
+"""
 from yes_filter import YesFilter
 
 
