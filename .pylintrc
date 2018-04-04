@@ -128,8 +128,8 @@ disable=print-statement,
         dict-keys-not-iterating,
         dict-values-not-iterating,
         too-few-public-methods,
-        logging-not-lazy,
-        C0111 
+        logging-format-interpolation,
+        missing-docstring
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -393,7 +393,7 @@ function-naming-style=snake_case
 
 # Regular expression matching correct function names. Overrides function-
 # naming-style
-#function-rgx=
+function-rgx=[a-z0-9_]{1,100}
 
 # Good variable names which should always be accepted, separated by a comma
 good-names=i,
@@ -444,7 +444,7 @@ variable-naming-style=snake_case
 
 # Regular expression matching correct variable names. Overrides variable-
 # naming-style
-#variable-rgx=
+variable-rgx=[a-z0-9_]{1,100}
 
 
 [IMPORTS]
