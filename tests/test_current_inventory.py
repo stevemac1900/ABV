@@ -1,9 +1,8 @@
+
 from available_inventory import InventoryQueries
 from inventory import Inventory
 
-import pytest
-
-base_dir = 'tests/sample_csv_files/'
+BASE_DIR = 'tests/sample_csv_files/'
 
 def make_beer(quantity):
     return {'name': 'Bells Best Brown',
@@ -14,7 +13,7 @@ def make_beer(quantity):
 
 
 def make_queries(filename):
-    return InventoryQueries(Inventory(base_dir + filename))
+    return InventoryQueries(Inventory(BASE_DIR + filename))
 
 
 def test_no_inventory():
