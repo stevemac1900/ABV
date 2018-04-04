@@ -10,7 +10,7 @@ node
     }
     stage('Static Analysis')
     {
-        sh 'pylint'
+        sh 'pylint src/abv/*.py tests/*.py'
     }
     stage('Coverage')
     {
