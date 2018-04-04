@@ -1,5 +1,5 @@
 import pytest
-from inventory import Inventory
+from abv.inventory import Inventory
 
 
 BASE_DIR = 'tests/sample_csv_files/'

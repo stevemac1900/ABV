@@ -5,10 +5,6 @@ class NameFilter:
         self.name = name
 
     def is_match(self, beer):
-        """
-        Checks to see if the beer object name matches the name which is passed through name filter
-        """
-
         if beer.name != self.name:
             return False
         return self.subfilter.is_match(beer)

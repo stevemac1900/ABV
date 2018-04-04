@@ -1,6 +1,6 @@
-from beer import Beer
-from name_filter import NameFilter
-from yes_filter import YesFilter
+from abv.beer import Beer
+from abv.name_filter import NameFilter
+from abv.yes_filter import YesFilter
 
 
 def test_name_filter_match():

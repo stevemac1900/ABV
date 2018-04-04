@@ -1,6 +1,6 @@
-from size_filter import SizeFilter
-from beer import Beer
-from yes_filter import YesFilter
+from abv.size_filter import SizeFilter
+from abv.beer import Beer
+from abv.yes_filter import YesFilter
 
 
 def test_size_filter_match():
