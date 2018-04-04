@@ -25,4 +25,3 @@ def test_negative_quantity_beer():
     negative_beer = Beer("Lionshead", "24/12 OZ. CAN", "Pilsner", "30.00", "-1")
     assert negative_beer.is_available() is False
     assert negative_beer.get_quantity() == "-1"
-
