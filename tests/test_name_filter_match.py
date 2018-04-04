@@ -1,3 +1,4 @@
+'class containing tests for name filter'
 from beer import Beer
 from name_filter import NameFilter
 from yes_filter import YesFilter
