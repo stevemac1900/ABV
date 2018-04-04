@@ -1,8 +1,8 @@
-
 from available_inventory import InventoryQueries
 from inventory import Inventory
 
 BASE_DIR = 'tests/sample_csv_files/'
+
 
 def make_beer(quantity):
     return {'name': 'Bells Best Brown',

@@ -1,11 +1,7 @@
-"""
-    This Module is for the purpose of testing the beer object and its functionality
-"""
 from beer import Beer
 
 
 def test_beer_attributes():
-
     beer_attribute = Beer("Guinness", "12/12 OZ. BTL", "Stout", "30.00", "2")
     assert beer_attribute.get_name() == "Guinness"
     assert beer_attribute.get_size() == "12/12 OZ. BTL"
