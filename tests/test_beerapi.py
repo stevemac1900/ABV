@@ -16,9 +16,9 @@ def expected_exception_on_read(request):
         session.get(TANCZOS_INVENTORY, exc=request.param)
         yield request.param
 
-
+# pylint: disable=redefined-outer-name, unused-argument
 def test_connection_exceptions_on_read(expected_exception_on_read):
-    assert beerapi.get_inventory() is ""
+    assert beerapi.get_inventory() == ""
 
 
 @pytest.fixture(params=[OSError])
@@ -27,7 +27,7 @@ def expected_exception_on_write(request):
         session.get(TANCZOS_INVENTORY, exc=request.param)
         yield request.param
 
-
+# pylint: disable=redefined-outer-name
 def test_exception_on_write(expected_exception_on_write):
     with pytest.raises(expected_exception_on_write):
         beerapi.write_beer_inventory()
