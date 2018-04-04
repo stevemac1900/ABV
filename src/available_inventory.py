@@ -4,8 +4,10 @@ from beer import Beer
 def keep_requested_attributes(beer):
     return {key: beer[key] for key in ['name', 'size', 'category', 'price', 'quantity']}
 
+
 def make_beer(beer):
     return Beer(beer['name'], beer['size'], beer['category'], beer['price'], beer['quantity'])
+
 
 class InventoryQueries:
 
@@ -16,6 +18,6 @@ class InventoryQueries:
         return [keep_requested_attributes(beer) for beer in self.inventory.get_historic_inventory()
                 if beer['quantity'] > 0]
 
-    def get_filtered_inventory(self, filter):
+    def get_filtered_inventory(self, beer_filter):
         return [make_beer(beer) for beer in self.inventory.get_historic_inventory()
-                if filter.is_match(make_beer(beer))]
+                if beer_filter.is_match(make_beer(beer))]
