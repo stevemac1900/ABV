@@ -1,11 +1,11 @@
-
-from inventory import Inventory
 import pytest
+from inventory import Inventory
 
-base_dir = 'tests/sample_csv_files/'
+
+BASE_DIR = 'tests/sample_csv_files/'
 
 def inventory_has_proper_size(filename, size):
-    i = Inventory(base_dir + filename)
+    i = Inventory(BASE_DIR + filename)
     assert size == len(i.get_historic_inventory())
 
 
@@ -22,7 +22,7 @@ def test_many_items():
 
 
 def test_load_numeric_fields():
-    i = Inventory(base_dir + 'single.csv')
+    i = Inventory(BASE_DIR + 'single.csv')
     values = i.get_historic_inventory()[0]
 
     assert pytest.approx(0) == values['quantity']
@@ -31,9 +31,9 @@ def test_load_numeric_fields():
     assert pytest.approx(1) == values['case_pack']
 
 def test_load_convert_case():
-    i = Inventory(base_dir + 'single.csv')
+    i = Inventory(BASE_DIR + 'single.csv')
     values = i.get_historic_inventory()[0]
 
-    assert 'Bells Best Brown' == values['name']
-    assert '1/2 Keg' == values['size']
-    assert 'Craft' == values['category']
+    assert values['name'] == 'Bells Best Brown'
+    assert values['size'] == '1/2 Keg'
+    assert values['category'] == 'Craft'
