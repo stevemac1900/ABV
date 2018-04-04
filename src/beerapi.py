@@ -1,7 +1,7 @@
-import requests
-import datetime
 import time
 import logging
+import datetime
+import requests
 
 
 def write_beer_inventory():
@@ -9,7 +9,7 @@ def write_beer_inventory():
     Retrieves inventory data from Tanczos and writes to file locally
     """
     beer_inventory = get_inventory()
-    if beer_inventory is not "":
+    if beer_inventory != "":
         write_inventory(beer_inventory)
 
 
@@ -22,22 +22,23 @@ def write_inventory(beer_inventory):
     except OSError as e:
         error_subclass = type(e).__name__
         logging.exception('Failed to fetch file: {}'.format(error_subclass))
+        # pylint: disable=unnecessary-pass
         pass
 
 
 def get_inventory():
     """
-
     Returns: The inventory or an emtpy string if the communication failed.
-
     """
+    beer_file = 'http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv'
     try:
-        beer_inventory = requests.get('http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv')
+        beer_inventory = requests.get(beer_file)
         return beer_inventory.text
     except requests.exceptions.ConnectionError as e:
         error_subclass = type(e).__name__
         logging.exception('Failed to fetch file: {}'.format(error_subclass))
         return ""
+
 
 def run():
     """
