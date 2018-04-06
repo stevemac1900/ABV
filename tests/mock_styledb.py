@@ -8,4 +8,5 @@ class StyleDB():
     def getStyle(self, name):
         if name in self.beer_dict:
             return self.beer_dict[name]
+        self.beer_dict[name] = self.brew_db.get_beer_style(name)
         return self.brew_db.get_beer_style(name)
