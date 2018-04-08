@@ -10,7 +10,8 @@ class StyleDB():
             return self.beer_dict[name]
         self.beer_dict[name] = self.brew_db.get_beer_style(name)
         try:
+            print("Executed")
             return self.brew_db.get_beer_style(name)
         except(Exception):
-            return 'Unknown'
+           return 'Unknown'
         
