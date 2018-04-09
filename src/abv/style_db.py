@@ -9,7 +9,7 @@ class StyleDB():
         self.brew_db = brew_db
 
     def get_style(self, name):
-        "Returns the style of a beer"
+        #Returns the style of a beer
         if name in self.beer_dict:
             return self.beer_dict[name]
         try:
