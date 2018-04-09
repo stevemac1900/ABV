@@ -1,4 +1,4 @@
-
+# pylint: disable=unused-argument
 
 class MockBreweryDBUnknownTracked:
     count = 0
