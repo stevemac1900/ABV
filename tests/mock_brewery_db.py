@@ -1,18 +1,19 @@
 
 
-class MockBreweryDBAlwaysUnknown:
+class MockBreweryDBUnknownTracked:
+    count = 0
     def get_beer_style(self, beer_name):
+        self.count += 1
         return "Unknown"
 
-
-class MockBreweryDBAlwaysStout:
-    def get_beer_style(beer_name):
+class MockBreweryDBStoutTracked:
+    count = 0
+    def get_beer_style(self, beer_name):
+        self.count += 1
         return "stout"
 
 class MockBreweryDBAlwaysError:
     count = 0
-    def get_beer_style(cls, beer_name):
-        print("count1:" + str(cls.count))
-        cls.count += 1
-        print("count2:" + str(cls.count))
+    def get_beer_style(self, beer_name):
+        self.count += 1
         raise Exception('Error')
