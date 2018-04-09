@@ -19,8 +19,6 @@ def write_inventory(beer_inventory):
     except OSError as e:
         error_subclass = type(e).__name__
         logging.exception('Failed to fetch file: {}'.format(error_subclass))
-        # pylint: disable=unnecessary-pass
-        pass
 
 
 def get_inventory():
