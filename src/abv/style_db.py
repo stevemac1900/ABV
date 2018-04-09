@@ -3,7 +3,7 @@
 
 
 class StyleDB():
-    "This class creates a database that stores beer styles"
+    #This class creates a database that stores beer styles
     def __init__(self, beer_dict, brew_db):
         self.beer_dict = beer_dict
         self.brew_db = brew_db
