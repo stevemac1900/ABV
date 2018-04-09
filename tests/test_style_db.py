@@ -18,10 +18,10 @@ def test_db_has_style_and_then_cache():
     styles_dict = {}
     styles_brewery_db = MockBreweryDBStoutTracked()
     styles = StyleDB(styles_dict, styles_brewery_db)
-    tested = styles.get_style('Guiness')
+    tested = styles.get_style('Guinness')
     print(tested)
-    assert styles.get_style('Guiness') == 'stout'
-    assert styles.get_style('Guiness') == 'stout'
+    assert styles.get_style('Guinness') == 'stout'
+    assert styles.get_style('Guinness') == 'stout'
     assert styles.brew_db.count == 1
 
 #Tests if unknown is first found by database and then from cache
@@ -38,6 +38,6 @@ def test_two_against_db():
     style_dict = {}
     mocked_db = MockBreweryDBAlwaysError()
     styles = StyleDB(style_dict, mocked_db)
-    assert styles.get_style('Guiness') == "Unknown"
-    assert styles.get_style('Guiness') == "Unknown"
+    assert styles.get_style('Guinness') == "Unknown"
+    assert styles.get_style('Guinness') == "Unknown"
     assert mocked_db.count == 2
