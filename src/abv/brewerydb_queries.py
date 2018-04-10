@@ -1,16 +1,18 @@
 import requests
 import logging
+import os
 
 
 class BreweryDBQueries:
-    def __init__(self, API_KEY):
-        self.API_KEY = API_KEY
+    def __init__(self):
+        pass
         # self.num_queries_today
         # self.last_query_timestamp
 
     def get_beer_style(self, beer_name):
         try:
-            request = requests.get('http://api/search?key=' + self.API_KEY + '&q=' + beer_name)
+            key = os.environ['BREWERYDB_API_KEY']
+            request = requests.get("http://api.brewerydb.com/v2/search?key=" + key + "&q=" + beer_name + "&type=beer")
             logging.info('The request was fetched successfully!')
             if self.is_unknown(request.json()):
                 return 'Unknown'
