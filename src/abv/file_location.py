@@ -1,4 +1,8 @@
+#pylint: disable=too-few-public-methods
+#pylint: disable=missing-docstring
+
 class FileLocation:
+    "This class allows us to abstract the location for our fetched files"
 
     def __init__(self):
         self.current_location = "../../beer_data/"
