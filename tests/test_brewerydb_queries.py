@@ -2,7 +2,7 @@ import pytest
 import requests
 import requests_mock
 from abv.brewerydb_queries import BreweryDBQueries
-
+import os
 # happy path
 # 0 results: don't try again
 # no name/style: return unknown
@@ -16,7 +16,7 @@ from abv.brewerydb_queries import BreweryDBQueries
     # 404 -- bad endpoint
 
 
-BREWERY_DB_URL = "http://api.brewerydb.com/v2/search?key=mock_key&q=Guinness" + "&type=beer"
+BREWERY_DB_URL = "http://api.brewerydb.com/v2/search?key="+ os.environ['BREWERYDB_API_KEY'] + "&q=Guinness&type=beer"
 QUERIES = BreweryDBQueries()
 
 @pytest.fixture()
@@ -36,14 +36,14 @@ def no_style():
 @pytest.fixture()
 def no_style_result():
     with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, json={'status': 'success', 'data': [{'style': {'name': ''}}]})
+        session.get(BREWERY_DB_URL, json={'status': 'success', 'data': [{'style': {'shortName': ''}}]})
         yield
 
 
 @pytest.fixture()
 def single_result():
     with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, json={'status': 'success', 'data': [{'style': {'name': 'Stout'}}]})
+        session.get(BREWERY_DB_URL, json={'status': 'success', 'data': [{'style': {'shortName': 'Stout'}}]})
         yield
 
 
@@ -51,7 +51,7 @@ def single_result():
 @pytest.fixture(params=[requests.exceptions.RequestException])
 def failed_request(request):
     with requests_mock.Mocker() as session:
-        session.get('http://api.brewerydb.com/v2/search?key=mock_key&q=Guinness&type=beer', exc=request.param)
+        session.get(BREWERY_DB_URL, exc=request.param)
 
         yield request.param
 
