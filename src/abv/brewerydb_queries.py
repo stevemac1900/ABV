@@ -16,7 +16,7 @@ class BreweryDBQueries:
             logging.info('The request was fetched successfully!')
             if self.is_unknown(request.json()):
                 return 'Unknown'
-            return request.json()['data'][0]['style']['name']
+            return request.json()['data'][0]['style']['shortName']
 
         except requests.exceptions.RequestException as e:
             error_subclass = type(e).__name__
@@ -28,8 +28,12 @@ class BreweryDBQueries:
             return True
         if 'style' not in beer_json['data'][0]:
             return True
-        beer_style = beer_json['data'][0]['style']['name']
+        beer_style = beer_json['data'][0]['style']['shortName']
         if len(beer_style) == 0:
             return True
 
         return False
+
+if __name__ == "__main__":
+    queries = BreweryDBQueries()
+    print(queries.get_beer_style('Guinness'))
