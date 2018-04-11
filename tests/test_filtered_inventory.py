@@ -19,7 +19,7 @@ def make_test_inventory_query(test_file):
 def test_one_beer_name_filter_true():
     query = make_test_inventory_query("single_positive_quantity.csv")
     name_filter = make_test_name_filter("Bells Best Brown")
-    assert query.get_filtered_inventory(name_filter)[0].get_name() == "Bells Best Brown"
+    assert query.get_filtered_inventory(name_filter)[0].name == "Bells Best Brown"
 
 
 def test_one_beer_name_filter_false():
