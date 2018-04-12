@@ -1,6 +1,6 @@
-from abv.beer import Beer
-from abv.style_filter import StyleFilter
-from abv.yes_filter import YesFilter
+from abv.inventory_api.beer import Beer
+from abv.inventory_api.filters.style_filter import StyleFilter
+from abv.inventory_api.filters.yes_filter import YesFilter
 
 
 def test_name_filter_match():
