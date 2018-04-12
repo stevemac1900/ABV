@@ -3,12 +3,11 @@ from abv.beer import Beer
 
 
 class Inventory:
-
     def __init__(self):
         self.inventory = []
-        inv_dict = {}
+
         tanczos_inventory =  MostRecentFile()
-        style_db = StyleDB(inv_dict,)
+        style_db = StyleDB()
 
         for beer in tanczos_inventory:
             style = style_db.get_style(beer.name)
