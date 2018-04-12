@@ -4,13 +4,13 @@ class MockBreweryDBUnknownTracked:
     count = 0
     def get_beer_style(self, beer_name):
         self.count += 1
-        return "Unknown"
+        return 'Unknown'
 
 class MockBreweryDBStoutTracked:
     count = 0
     def get_beer_style(self, beer_name):
         self.count += 1
-        return "stout"
+        return 'stout'
 
 class MockBreweryDBAlwaysError:
     count = 0

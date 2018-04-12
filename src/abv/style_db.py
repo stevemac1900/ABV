@@ -1,20 +1,20 @@
 # pylint: disable=missing-docstring
 # pylint: disable=too-few-public-methods
+from tests import mock_brewery_db
 
-
-class StyleDB():
+class StyleDB:
     #This class creates a database that stores beer styles
-    def __init__(self, beer_dict, brew_db):
-        self.beer_dict = beer_dict
-        self.brew_db = brew_db
+    def __init__(self):
+        self.style_dict = {}
+        self.brew_db = mock_brewery_db.MockBreweryDBStoutTracked #Need to make a stub for a fake Brewery DB
 
     def get_style(self, name):
         #Returns the style of a beer
-        if name in self.beer_dict:
-            return self.beer_dict[name]
+        if name in self.style_dict:
+            return self.style_dict[name]
         try:
             style = self.brew_db.get_beer_style(name)
-            self.beer_dict[name] = style
+            self.style_dict[name] = style
             return style
         # pylint: disable=broad-except
         except Exception:
