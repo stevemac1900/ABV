@@ -1,6 +1,7 @@
 from abv.style_db import StyleDB
 from abv.beer import Beer
 
+
 class Inventory:
 
     def __init__(self):
@@ -16,4 +17,3 @@ class Inventory:
 
     def get_historic_inventory(self):
         return self.inventory
-        
