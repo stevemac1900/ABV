@@ -1,7 +1,7 @@
-from tests.mock_brewery_db import MockBreweryDBStoutTracked
-from tests.mock_brewery_db import MockBreweryDBAlwaysError
-from tests.mock_brewery_db import MockBreweryDBUnknownTracked
-from abv.style_db import StyleDB
+from tests.inventory_api_tests.mock_brewery_db import MockBreweryDBStoutTracked
+from tests.inventory_api_tests.mock_brewery_db import MockBreweryDBAlwaysError
+from tests.inventory_api_tests.mock_brewery_db import MockBreweryDBUnknownTracked
+from abv.inventory_api.style_db import StyleDB
 
 
 

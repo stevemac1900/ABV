@@ -1,6 +1,6 @@
-from abv.beer import Beer
-from abv.filter_ds import FilterDS
-from abv.filter_factory import build
+from abv.inventory_api.beer import Beer
+from abv.inventory_api.filter_ds import FilterDS
+from abv.inventory_api.filter_factory import build
 
 def test_all_attributes_match():
     test_beer = Beer("Guinness", "12/12 OZ. BTL", "Stout", "30.00", 2)

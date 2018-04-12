@@ -1,7 +1,7 @@
-from abv.available_inventory import InventoryQueries
-from abv.inventory import Inventory
-from abv.name_filter import NameFilter
-from abv.yes_filter import YesFilter
+from abv.inventory_api.inventory_queries import InventoryQueries
+from abv.inventory_api.inventory import Inventory
+from abv.inventory_api.filters.name_filter import NameFilter
+from abv.inventory_api.filters.yes_filter import YesFilter
 
 BASE_DIR = "tests/sample_csv_files/"
 
