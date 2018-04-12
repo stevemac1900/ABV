@@ -1,11 +1,11 @@
-"This is the filter factor that turns filter data strcutures into filters. "
+# pylint: disable=missing-docstring
 from abv.inventory_api.filters.size_filter import SizeFilter
 from abv.inventory_api.filters.name_filter import NameFilter
 from abv.inventory_api.filters.yes_filter import YesFilter
 from abv.inventory_api.filters.style_filter import StyleFilter
 from abv.inventory_api.filters.availability_filter import AvailabilityFilter
 
-#pylint: disable=missing-docstring
+
 def build(filter_ds):
     recursive_filter = YesFilter()
     if filter_ds.size is not None:
