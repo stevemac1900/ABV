@@ -1,7 +1,7 @@
-from abv.available_inventory import InventoryQueries
-from abv.inventory import Inventory
-from abv.name_filter import NameFilter
-from abv.yes_filter import YesFilter
+from abv.inventory_api.inventory_queries import InventoryQueries
+from abv.inventory_api.inventory import Inventory
+from abv.inventory_api.filters.name_filter import NameFilter
+from abv.inventory_api.filters.yes_filter import YesFilter
 
 BASE_DIR = "tests/sample_csv_files/"
 
@@ -19,7 +19,7 @@ def make_test_inventory_query(test_file):
 def test_one_beer_name_filter_true():
     query = make_test_inventory_query("single_positive_quantity.csv")
     name_filter = make_test_name_filter("Bells Best Brown")
-    assert query.get_filtered_inventory(name_filter)[0].get_name() == "Bells Best Brown"
+    assert query.get_filtered_inventory(name_filter)[0].name == "Bells Best Brown"
 
 
 def test_one_beer_name_filter_false():

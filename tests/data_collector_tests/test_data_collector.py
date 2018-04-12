@@ -1,7 +1,7 @@
 import pytest
 import requests
 import requests_mock
-import abv.beerapi as beerapi
+import abv.data_collector.data_collector as collector
 
 TANCZOS_INVENTORY = 'http://www.tanczos.com/tanczos.com/beerinventory/webexport.csv'
 
@@ -15,7 +15,7 @@ def expected_exception_on_read(request):
 
 # pylint: disable=redefined-outer-name, unused-argument
 def test_connection_exceptions_on_read(expected_exception_on_read):
-    assert beerapi.get_inventory() == ""
+    assert collector.get_inventory() == ""
 
 
 @pytest.fixture(params=[OSError])
@@ -28,4 +28,4 @@ def expected_exception_on_write(request):
 # pylint: disable=redefined-outer-name
 def test_exception_on_write(expected_exception_on_write):
     with pytest.raises(expected_exception_on_write):
-        beerapi.write_beer_inventory()
+        collector.write_beer_inventory()

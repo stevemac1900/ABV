@@ -1,6 +1,6 @@
-from abv.availability_filter import AvailabilityFilter
-from abv.beer import Beer
-from abv.yes_filter import YesFilter
+from abv.inventory_api.filters.availability_filter import AvailabilityFilter
+from abv.inventory_api.beer import Beer
+from abv.inventory_api.filters.yes_filter import YesFilter
 
 
 def make_test_beer(available):
