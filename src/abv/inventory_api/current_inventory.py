@@ -1,17 +1,17 @@
-from abv.style_db import StyleDB
-from abv.beer import Beer
+from abv.inventory_api.style_db import StyleDB
+from abv.inventory_api.beer import Beer
 
 
 class Inventory:
     def __init__(self):
         self.inventory = []
 
-        tanczos_inventory =  MostRecentFile()
+        tanczos_inventory = MostRecentFile()
         style_db = StyleDB()
 
         for beer in tanczos_inventory:
             style = style_db.get_style(beer.name)
-            full_beer = Beer(beer.name,beer.size,style,beer.price,beer.quantity)
+            full_beer = Beer(beer.name, beer.size, style, beer. price, beer.quantity)
             self.inventory.append(full_beer)
 
     def get_historic_inventory(self):
