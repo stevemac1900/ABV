@@ -1,4 +1,4 @@
-from abv.filter_ds import FilterDS
+from abv.inventory_api.filter_ds import FilterDS
 
 
 def test_filter_with_no_filters():
