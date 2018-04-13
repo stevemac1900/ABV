@@ -1,29 +1,24 @@
 import pytest
 import requests
 import requests_mock
+import os
 from abv.brewerydb_queries import BreweryDBQueries
 
-# happy path
-# 0 results: don't try again
-# no name/style: return unknown
-# server is down: throw exception
-# should we distinguish between try again b/c rate limit or b/c server is down?
-# implement a counter that handles up to 400 requests in a day EST
-# # hit the 400 requests per day if clocks are on different times: throw exception
-# return error code statement for anything that's not 200
-    # 400
-    # 401 -- bad key input
-    # 404 -- bad endpoint
-
-
-BREWERY_DB_URL = "http://api.brewerydb.com/v2/search?key=mock_key&q=Guinness" + "&type=beer"
+key = os.environ['BREWERYDB_API_KEY']
+BREWERY_DB_URL = 'http://api.brewerydb.com/v2/search?key=' + key + '&q=Guinness&type=beer'
 QUERIES = BreweryDBQueries()
+
 
 @pytest.fixture()
 def no_name():
     with requests_mock.Mocker() as session:
         session.get(BREWERY_DB_URL, json={'status': 'success'})
         yield
+
+
+def test_no_name(no_name):
+    style = QUERIES.get_beer_style('Guinness')
+    assert style == 'Unknown'
 
 
 @pytest.fixture()
@@ -33,37 +28,17 @@ def no_style():
         yield
 
 
-@pytest.fixture()
-def no_style_result():
-    with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, json={'status': 'success', 'data': [{'style': {'name': ''}}]})
-        yield
-
-
-@pytest.fixture()
-def single_result():
-    with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, json={'status': 'success', 'data': [{'style': {'name': 'Stout'}}]})
-        yield
-
-
-# Exception would be thrown when the "status" key has "failure" value
-@pytest.fixture(params=[requests.exceptions.RequestException])
-def failed_request(request):
-    with requests_mock.Mocker() as session:
-        session.get('http://api.brewerydb.com/v2/search?key=mock_key&q=Guinness&type=beer', exc=request.param)
-
-        yield request.param
-
-
-def test_no_name(no_name):
-    style = QUERIES.get_beer_style('Guinness')
-    assert style == 'Unknown'
-
-
 def test_no_style(no_style):
     style = QUERIES.get_beer_style('Guinness')
     assert style == 'Unknown'
+
+
+@pytest.fixture()
+def no_style_result():
+    with requests_mock.Mocker() as session:
+        session.get(BREWERY_DB_URL, json={'status': 'success', 'data':
+            [{'style': {'name': '', 'shortName': ''}}]})
+        yield
 
 
 def test_no_style_result(no_style_result):
@@ -71,11 +46,61 @@ def test_no_style_result(no_style_result):
     assert style == 'Unknown'
 
 
+@pytest.fixture()
+def no_short_name_for_style():
+    with requests_mock.Mocker() as session:
+        session.get(BREWERY_DB_URL, json={'status': 'success', 'data':
+            [{'style': {'name': 'Irish Imperial Stout', 'shortName': ''}}]})
+        yield
+
+
+def test_no_short_name_for_style(no_short_name_for_style):
+    style = QUERIES.get_beer_style('Guinness')
+    assert style == 'Irish Imperial Stout'
+
+
+@pytest.fixture()
+def single_result():
+    with requests_mock.Mocker() as session:
+        session.get(BREWERY_DB_URL, json={'status': 'success', 'data':
+            [{'style': {'name': 'Irish Imperial Stout', 'shortName': 'Stout'}}]})
+        yield
+
+
 def test_single_result(single_result):
     style = QUERIES.get_beer_style('Guinness')
     assert style == 'Stout'
 
 
+@pytest.fixture(params=[requests.exceptions.RequestException])
+def failed_request(request):
+    with requests_mock.Mocker() as session:
+        session.get(BREWERY_DB_URL, exc=request.param)
+        yield request.param
+
+
 def test_failed_request(failed_request):
-    style = QUERIES.get_beer_style('Guinness')
-    assert style == ''
+    QUERIES.get_beer_style('Guinness')
+
+
+@pytest.fixture(params=[requests.exceptions.ConnectionError])
+def server_down(request):
+    with requests_mock.Mocker() as session:
+        session.get(BREWERY_DB_URL, exc=request.param)
+        yield request.param
+
+
+def test_server_down(server_down):
+    QUERIES.get_beer_style('Guinness')
+
+
+@pytest.fixture(params=[requests.exceptions.RequestException])
+def request_count_close_to_limit(request):
+    with requests_mock.Mocker() as session:
+        session.get(BREWERY_DB_URL, exc=request.param)
+        yield request.param
+
+
+def test_request_limit(request_count_close_to_limit):
+    QUERIES.get_beer_style('Guinness')
+    QUERIES.num_queries_today = 390
