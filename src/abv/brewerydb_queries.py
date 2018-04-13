@@ -15,6 +15,9 @@ class BreweryDBQueries:
 
             key = os.environ['BREWERYDB_API_KEY']
             request = requests.get('http://api.brewerydb.com/v2/search?key=' + key + '&q=' + beer_name + '&type=beer')
+            if request.json()['status'] != 'success':
+                raise Exception
+
             logging.info('The request was fetched successfully!')
             if self.is_unknown(request.json()):
                 return 'Unknown'
