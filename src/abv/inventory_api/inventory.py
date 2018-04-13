@@ -14,6 +14,7 @@ def convert_to_numeric(item):
 
 
 class Inventory:
+
     def __init__(self, filename):
         with open(filename) as csvfile:
             reader = csv.DictReader(csvfile,

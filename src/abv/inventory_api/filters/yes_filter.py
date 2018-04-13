@@ -1,4 +1,3 @@
-
 class YesFilter:
     # pylint: disable=unused-argument
     @classmethod

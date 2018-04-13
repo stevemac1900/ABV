@@ -1,4 +1,5 @@
 class Beer:
+
     # pylint: disable=too-many-arguments
     def __init__(self, name, size, style, price, quantity):
         self.name = name

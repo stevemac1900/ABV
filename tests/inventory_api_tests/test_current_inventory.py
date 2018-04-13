@@ -1,5 +1,5 @@
-from abv.available_inventory import InventoryQueries
-from abv.inventory import Inventory
+from abv.inventory_api.inventory_queries import InventoryQueries
+from abv.inventory_api.inventory import Inventory
 
 BASE_DIR = 'tests/sample_csv_files/'
 
