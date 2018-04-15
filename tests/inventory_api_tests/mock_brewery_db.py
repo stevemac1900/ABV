@@ -1,5 +1,19 @@
 # pylint: disable=unused-argument
 
+class MockDB:
+
+    count = 0
+    def get_beer_style(self, beer_name):
+        self.count += 1
+        if beer_name == 'Guinness':
+            return 'stout'
+        elif beer_name == 'Nitro':
+            return 'stout'
+        elif beer_name == 'Duck Tails':
+            return 'Unknown'
+        raise Exception('Error')
+
+
 
 class MockBreweryDBUnknownTracked:
 
@@ -7,7 +21,7 @@ class MockBreweryDBUnknownTracked:
 
     def get_beer_style(self, beer_name):
         self.count += 1
-        return "Unknown"
+        return 'Unknown'
 
 
 class MockBreweryDBStoutTracked:
@@ -16,7 +30,7 @@ class MockBreweryDBStoutTracked:
 
     def get_beer_style(self, beer_name):
         self.count += 1
-        return "stout"
+        return 'stout'
 
 
 class MockBreweryDBAlwaysError:
