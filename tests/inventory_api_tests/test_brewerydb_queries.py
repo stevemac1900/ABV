@@ -1,7 +1,7 @@
 import pytest
 import requests
 import requests_mock
-from abv.brewerydb_queries import BreweryDBQueries
+from abv.inventory_api.brewerydb_queries import BreweryDBQueries
 import os
 # happy path
 # 0 results: don't try again
