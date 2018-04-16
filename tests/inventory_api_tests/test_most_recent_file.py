@@ -5,13 +5,8 @@ import pytest
 from abv.most_recent_file import MostRecentFile
 
 
-#Sets current working directory to ABV
-def set_correct_cwd():
-    while not os.getcwd().endswith('ABV'):
-        os.chdir(os.path.dirname(os.getcwd()))
 
 def test_chooses_most_recent_file():
-    set_correct_cwd()
     temp_dir = tempfile.mkdtemp()
     # pylint: disable=unused-variable
     temp_file_past = tempfile.NamedTemporaryFile(dir=temp_dir, prefix='a')
@@ -31,7 +26,6 @@ def test_chooses_most_recent_file():
 
 
 def test_empty_file():
-    set_correct_cwd()
     temp_dir = tempfile.mkdtemp()
     temp_file = tempfile.NamedTemporaryFile(dir=temp_dir)
     source_file = os.path.abspath('tests/sample_csv_files/empty.csv')
@@ -43,7 +37,6 @@ def test_empty_file():
 
 
 def test_file_single_line():
-    set_correct_cwd()
     temp_dir = tempfile.mkdtemp()
     temp_file = tempfile.NamedTemporaryFile(dir=temp_dir)
     source_file = os.path.abspath('tests/sample_csv_files/categories_only.csv')
@@ -54,7 +47,6 @@ def test_file_single_line():
         test_iterator.__next__()
 
 def test_empty_directory():
-    set_correct_cwd()
     temp_dir = tempfile.mkdtemp()
     most_recent_file = MostRecentFile(temp_dir)
     test_iterator = iter(most_recent_file)
@@ -64,7 +56,6 @@ def test_empty_directory():
 
 def test_full_single_file():
     count = 0
-    set_correct_cwd()
     temp_dir = tempfile.mkdtemp()
     temp_file = tempfile.NamedTemporaryFile(dir=temp_dir)
     source_file = os.path.abspath('tests/sample_csv_files/beer_data2018-04-14_16:34:24.131698.csv')
