@@ -2,11 +2,11 @@ import pytest
 import requests
 import requests_mock
 import os
-from abv.brewerydb_queries import BreweryDBQueries
+from abv.inventory_api.brewerydb_queries import BreweryDBQueries
 
-key = os.environ['BREWERYDB_API_KEY']
-BREWERY_DB_URL = 'http://api.brewerydb.com/v2/search?key=' + key + '&q=Guinness&type=beer'
+BREWERY_DB_URL = 'http://api.brewerydb.com/v2/search?key=mock_key&q=Guinness&type=beer'
 QUERIES = BreweryDBQueries()
+QUERIES.key = 'mock_key'
 
 
 @pytest.fixture()

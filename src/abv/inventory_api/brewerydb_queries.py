@@ -5,6 +5,7 @@ import os
 
 class BreweryDBQueries:
     def __init__(self):
+        self.key = os.environ['BREWERYDB_API_KEY']
         self.num_queries_today = 0
         # self.last_query_timestamp
 
@@ -13,9 +14,8 @@ class BreweryDBQueries:
             if self.num_queries_today >= 390:
                 raise Exception
 
-            key = os.environ['BREWERYDB_API_KEY']
-            request = requests.get('http://api.brewerydb.com/v2/search?key=' + key + '&q=' + beer_name + '&type=beer')
-            if not self.is_success(request.json()):
+            request = requests.get('http://api.brewerydb.com/v2/search?key=' + self.key + '&q=' + beer_name + '&type=beer')
+            if request.json()['status'] != 'success':
                 raise Exception
 
             logging.info('The request was fetched successfully!')
@@ -27,11 +27,6 @@ class BreweryDBQueries:
             error_subclass = type(e).__name__
             logging.exception('The request could not be found: {}'.format(error_subclass))
             return ""
-
-    def is_success(self, request_json):
-        if request_json['status'] != 'success':
-            return False
-        return True
 
     def is_unknown(self, beer_json):
         if 'data' not in beer_json:
