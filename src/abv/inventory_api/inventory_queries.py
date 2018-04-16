@@ -1,4 +1,4 @@
-from abv.beer import Beer
+from abv.inventory_api.beer import Beer
 
 
 def keep_requested_attributes(beer):

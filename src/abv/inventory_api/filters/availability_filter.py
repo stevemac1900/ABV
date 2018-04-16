@@ -1,4 +1,5 @@
 class AvailabilityFilter:
+
     def __init__(self, subfilter, quantity_requested):
         self.subfilter = subfilter
         self.quantity_requested = quantity_requested
