@@ -33,7 +33,3 @@ class BreweryDBQueries:
             return True
 
         return False
-
-if __name__ == "__main__":
-    queries = BreweryDBQueries()
-    print(queries.get_beer_style('Guinness'))
