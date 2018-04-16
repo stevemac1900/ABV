@@ -26,6 +26,6 @@ def test_unknown_from_db_then_cache():
 def test_two_against_db():
     """ Tests that if query throws error once, that it throws it again by same input """
     styles = StyleDB()
-    assert styles.get_style('Guinness') == "Unknown"
-    assert styles.get_style('Guinness') == "Unknown"
+    assert styles.get_style('xyz') == "Unknown"
+    assert styles.get_style('xyz') == "Unknown"
     assert styles.brew_db.count == 2

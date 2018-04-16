@@ -1,5 +1,6 @@
 # pylint: disable=unused-argument
 
+
 class MockDB:
     count = 0
 
@@ -9,7 +10,8 @@ class MockDB:
             return 'stout'
         elif beer_name == 'Nitro':
             return 'stout'
-
+        elif beer_name == 'Duck Tails':
+            return 'Unknown'
         raise Exception('Error')
 
 

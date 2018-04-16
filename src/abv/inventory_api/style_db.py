@@ -1,13 +1,12 @@
 # pylint: disable=missing-docstring
 # pylint: disable=too-few-public-methods
-from tests.inventory_api_tests.mock_brewery_db import MockDB
-
+from tests.inventory_api_tests import mock_brewery_db
 
 class StyleDB:
     #This class creates a database that stores beer styles
     def __init__(self):
-        self.style_dict = {}
-        self.brew_db = MockDB()
+        self.style_dict = {'Nitro':'stout'}
+        self.brew_db = mock_brewery_db.MockDB()
 
     def get_style(self, beer_name):
         #Returns the style of a beer
