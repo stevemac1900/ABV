@@ -83,17 +83,6 @@ def test_failed_request(failed_request):
     QUERIES.get_beer_style('Guinness')
 
 
-@pytest.fixture(params=[requests.exceptions.ConnectionError])
-def server_down(request):
-    with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, exc=request.param)
-        yield request.param
-
-
-def test_server_down(server_down):
-    QUERIES.get_beer_style('Guinness')
-
-
 @pytest.fixture(params=[requests.exceptions.RequestException])
 def request_count_close_to_limit(request):
     with requests_mock.Mocker() as session:
