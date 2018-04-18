@@ -1,15 +1,19 @@
 from flask import Flask, request
-from abv.inventory_api.inventory import Inventory
+from abv.inventory_api.current_inventory import Inventory
 from abv.inventory_api.inventory_queries import InventoryQueries
 from abv.inventory_api.filter_ds import FilterDS
 import json
 app = Flask(__name__)
 
-inventory = None #Inventory("../../tests/sample_csv_files/three_two_positive_one_negative.csv")
+inventory = None#Inventory("../../../tests/sample_csv_files/three.csv")
 queries = InventoryQueries(inventory)
 
 @app.route('/current')
 def get_current_inventory():
+    keys = list(request.args.keys())
+    for key in keys:
+        if key != 'name' and key != 'size' and key != 'style' and key != 'availability':
+            return "Bad parameter given!", 400
 
     name = request.args.get('name')
     size = request.args.get('size')

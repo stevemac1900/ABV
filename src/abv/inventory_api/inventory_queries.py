@@ -1,4 +1,5 @@
 from abv.inventory_api.beer import Beer
+from abv.inventory_api.filter_factory import build
 
 
 def keep_requested_attributes(beer):
@@ -18,6 +19,7 @@ class InventoryQueries:
         return [keep_requested_attributes(beer) for beer in self.inventory.get_historic_inventory()
                 if beer['quantity'] > 0]
 
-    def get_filtered_inventory(self, beer_filter):
+    def get_filtered_inventory(self, filter_ds):
+        beer_filter = build(filter_ds)
         return [make_beer(beer) for beer in self.inventory.get_historic_inventory()
                 if beer_filter.is_match(make_beer(beer))]
