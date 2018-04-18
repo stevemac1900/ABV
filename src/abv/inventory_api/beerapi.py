@@ -1,5 +1,5 @@
 from flask import Flask, request
-from abv.inventory_api.current_inventory import Inventory
+from abv.inventory_api.inventory import Inventory
 from abv.inventory_api.inventory_queries import InventoryQueries
 from abv.inventory_api.filter_ds import FilterDS
 import json
@@ -34,4 +34,4 @@ def get_current_inventory():
 
 
 if __name__ == "__main__":
-    app.run(host="localhost")
+    app.run(host="0.0.0.0")
