@@ -1,7 +1,7 @@
 # pylint: disable=too-few-public-methods
-# pylint: disable=missing-docstring
 import os
-
+#This file contains the MostRecentFile class. It provides the functionality to turn
+#he most recently fetched Tanczos file and returns an iterator over the file.
 
 class MostRecentFile:
     # This class creates an iterator over the most recent tanczos file.
