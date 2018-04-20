@@ -1,95 +1,53 @@
 import pytest
 import requests
 import requests_mock
-import os
+import re
 from abv.inventory_api.brewerydb_queries import BreweryDBQueries
 
-BREWERY_DB_URL = 'http://api.brewerydb.com/v2/search?key=mock_key&q=Guinness&type=beer'
-QUERIES = BreweryDBQueries()
-QUERIES.key = 'mock_key'
 
-
-@pytest.fixture()
-def no_name():
+def verify(the_json, beer_name, expected):
     with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, json={'status': 'success'})
-        yield
+        BREWERYDB_URI = re.compile('api.brewerydb.com')
+        session.register_uri('GET', BREWERYDB_URI, json=the_json)
+
+        b = BreweryDBQueries()
+
+        style = b.get_beer_style(beer_name)
+        assert style == expected
 
 
-def test_no_name(no_name):
-    style = QUERIES.get_beer_style('Guinness')
-    assert style == 'Unknown'
+def test_no_data_available():
+    the_json = {'status': 'success'}
+    beer_name = 'Guinness'
+    expected = 'Unknown'
+    verify(the_json, beer_name, expected)
 
 
-@pytest.fixture()
-def no_style():
-    with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, json={'status': 'success', 'data': [{}]})
-        yield
+def test_no_style_available():
+    the_json = {'status': 'success', 'data': [{}]}
+    beer_name = 'Guinness'
+    expected = 'Unknown'
+    verify(the_json, beer_name, expected)
 
 
-def test_no_style(no_style):
-    style = QUERIES.get_beer_style('Guinness')
-    assert style == 'Unknown'
+def test_no_name_of_style_available():
+    the_json = {'status': 'success', 'data': [{'style': {'name': '', 'shortName': ''}}]}
+    beer_name = 'Guinness'
+    expected = 'Unknown'
+    verify(the_json, beer_name, expected)
 
 
-@pytest.fixture()
-def no_style_result():
-    with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, json={'status': 'success', 'data':
-            [{'style': {'name': '', 'shortName': ''}}]})
-        yield
+def test_long_name_available():
+    the_json = {'status': 'success', 'data': [{'style': {'name': 'Irish Imperial Stout',
+                                                         'shortName': ''}}]}
+    beer_name = 'Guinness'
+    expected = 'Irish Imperial Stout'
+    verify(the_json, beer_name, expected)
 
 
-def test_no_style_result(no_style_result):
-    style = QUERIES.get_beer_style('Guinness')
-    assert style == 'Unknown'
-
-
-@pytest.fixture()
-def no_short_name_for_style():
-    with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, json={'status': 'success', 'data':
-            [{'style': {'name': 'Irish Imperial Stout', 'shortName': ''}}]})
-        yield
-
-
-def test_no_short_name_for_style(no_short_name_for_style):
-    style = QUERIES.get_beer_style('Guinness')
-    assert style == 'Irish Imperial Stout'
-
-
-@pytest.fixture()
-def single_result():
-    with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, json={'status': 'success', 'data':
-            [{'style': {'name': 'Irish Imperial Stout', 'shortName': 'Stout'}}]})
-        yield
-
-
-def test_single_result(single_result):
-    style = QUERIES.get_beer_style('Guinness')
-    assert style == 'Stout'
-
-
-@pytest.fixture(params=[requests.exceptions.RequestException])
-def failed_request(request):
-    with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, exc=request.param)
-        yield request.param
-
-
-def test_failed_request(failed_request):
-    QUERIES.get_beer_style('Guinness')
-
-
-@pytest.fixture(params=[requests.exceptions.RequestException])
-def request_count_close_to_limit(request):
-    with requests_mock.Mocker() as session:
-        session.get(BREWERY_DB_URL, exc=request.param)
-        yield request.param
-
-
-def test_request_limit(request_count_close_to_limit):
-    QUERIES.get_beer_style('Guinness')
-    QUERIES.num_queries_today = 390
+def test_short_name_available():
+    the_json = {'status': 'success', 'data': [{'style': {'name': 'Irish Imperial Stout',
+                                                         'shortName': 'Stout'}}]}
+    beer_name = 'Guinness'
+    expected = 'Stout'
+    verify(the_json, beer_name, expected)
