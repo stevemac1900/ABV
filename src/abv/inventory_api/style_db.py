@@ -19,3 +19,4 @@ class StyleDB:
         # pylint: disable=broad-except
         except Exception:
             return 'Unknown'
+
