@@ -5,13 +5,16 @@ import os
 
 class BreweryDBQueries:
     def __init__(self):
-        if os.environ['BREWERYDB_API_KEY'] is None:
-            self.key = ''
-        else:
-            self.key = os.environ['BREWERYDB_API_KEY']
-
         self.num_queries_today = 0
         # self.last_query_timestamp
+        try:
+            if os.environ['BREWERYDB_API_KEY'] is not None:
+                self.key = os.environ['BREWERYDB_API_KEY']
+            else:
+                raise KeyError
+
+        except KeyError as e:
+            self.key = ''
 
     def get_beer_style(self, beer_name):
         try:
