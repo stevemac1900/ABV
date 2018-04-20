@@ -1,12 +1,25 @@
 from flask import Flask, request
-from abv.inventory_api.inventory import Inventory
+from abv.inventory_api.current_inventory import Inventory
 from abv.inventory_api.inventory_queries import InventoryQueries
 from abv.inventory_api.filter_ds import FilterDS
+from abv import most_recent_file
+from abv.inventory_api import style_db
+from abv.file_location import FileLocation
 import json
-app = Flask(__name__)
 
-inventory = None#Inventory("../../../tests/sample_csv_files/three.csv")
-queries = InventoryQueries(inventory)
+
+app = Flask(__name__)
+queries = None
+
+
+def initialize_inventory():
+    location = FileLocation.save_location
+    the_file = most_recent_file.MostRecentFile(location)
+    style = style_db.StyleDB()
+    inventory = Inventory(the_file, style)
+    global queries
+    queries = InventoryQueries(inventory)
+
 
 @app.route('/current')
 def get_current_inventory():
@@ -34,4 +47,5 @@ def get_current_inventory():
 
 
 if __name__ == "__main__":
+    initialize_inventory()
     app.run(host="0.0.0.0")
