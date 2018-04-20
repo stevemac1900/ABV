@@ -52,3 +52,4 @@ class BreweryDBQueries:
             return beer_json['data'][0]['style']['name']
 
         return beer_json['data'][0]['style']['shortName']
+    
