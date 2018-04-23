@@ -4,8 +4,6 @@ import requests_mock
 import src.abv.twilio_api.twilio_flask as twilio_flask
 
 
-
-
 @fixture()
 def app():
     twilio_flask.APP.testing = True
