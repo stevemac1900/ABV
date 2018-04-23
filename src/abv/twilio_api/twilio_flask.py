@@ -1,7 +1,7 @@
 """This file gives our app the ability to respond to text queries for specific styles of beer."""
 import json
-from flask import request
 from flask import Flask
+from flask import request
 from twilio.twiml.messaging_response import MessagingResponse
 import requests
 
