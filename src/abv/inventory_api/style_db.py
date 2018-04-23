@@ -13,7 +13,7 @@ class StyleDB:
         if beer_name in self.style_dict:
             return self.style_dict[beer_name]
         try:
-            style = self.brew_db.get_beer_style(beer_name)
+            style = self.brew_db.get_style(beer_name)
             self.style_dict[beer_name] = style
             return style
         # pylint: disable=broad-except

@@ -4,7 +4,7 @@
 class MockDB:
     count = 0
 
-    def get_beer_style(self, beer_name):
+    def get_style(self, beer_name):
         self.count += 1
         if beer_name == 'Guinness':
             return 'stout'
@@ -18,7 +18,7 @@ class MockDB:
 class MockBreweryDBUnknownTracked:
     count = 0
 
-    def get_beer_style(self, beer_name):
+    def get_style(self, beer_name):
         self.count += 1
         return 'Unknown'
 
@@ -26,7 +26,7 @@ class MockBreweryDBUnknownTracked:
 class MockBreweryDBStoutTracked:
     count = 0
 
-    def get_beer_style(self,beer_name):
+    def get_style(self,beer_name):
         self.count += 1
         return 'stout'
 
@@ -34,6 +34,6 @@ class MockBreweryDBStoutTracked:
 class MockBreweryDBAlwaysError:
     count = 0
 
-    def get_beer_style(self, beer_name):
+    def get_style(self, beer_name):
         self.count += 1
         raise Exception('Error')
