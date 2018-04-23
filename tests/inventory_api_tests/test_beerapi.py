@@ -20,15 +20,14 @@ def test_empty_results():
 def test_single_result():
     beerapi.queries = MockInventoryQueries([pabst])
     result = app.get('/current')
-    assert result.data == b'[{"name": "Pabst", "size": "12/12oz", "style": "lager", "quantity": "1", "price": "20"}]'
+    assert eval(result.data)[0]['name'] == 'Pabst'
 
 
 def test_two_results():
     beerapi.queries = MockInventoryQueries([pabst, guinness])
     result = app.get('/current')
-    assert result.data == b'[{"name": "Pabst", "size": "12/12oz", "style": "lager", "quantity": "1", "price": "20"}, ' \
-                          b'{"name": "Guinness", "size": "12/12oz", "style": "stout", "quantity": "1", "price": "30"}]'
-
+    assert eval(result.data)[0]['name'] == 'Pabst'
+    assert eval(result.data)[1]['name'] == 'Guinness'
 
 def test_no_filter():
     saver = MockInventoryQueriesSaving()
