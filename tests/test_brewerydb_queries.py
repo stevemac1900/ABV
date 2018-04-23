@@ -1,14 +1,12 @@
-import pytest
-import requests
-import requests_mock
 import re
+import requests_mock
 from abv.inventory_api.brewerydb_queries import BreweryDBQueries
 
 
 def verify(the_json, beer_name, expected):
     with requests_mock.Mocker() as session:
-        BREWERYDB_URI = re.compile('api.brewerydb.com')
-        session.register_uri('GET', BREWERYDB_URI, json=the_json)
+        brewery_db_url = re.compile('api.brewerydb.com')
+        session.register_uri('GET', brewery_db_url, json=the_json)
 
         b = BreweryDBQueries()
 

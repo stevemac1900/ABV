@@ -1,13 +1,8 @@
 from abv.inventory_api.inventory_queries import InventoryQueries
 from abv.inventory_api.inventory import Inventory
-from abv.inventory_api.filters.name_filter import NameFilter
-from abv.inventory_api.filters.yes_filter import YesFilter
-
+from abv.inventory_api.filter_factory import build
+from abv.inventory_api.filter_ds import FilterDS
 BASE_DIR = "tests/sample_csv_files/"
-
-
-def make_test_name_filter(beer_name):
-    return NameFilter(YesFilter(), beer_name)
 
 
 def make_test_inventory_query(test_file):
@@ -18,23 +13,23 @@ def make_test_inventory_query(test_file):
 
 def test_one_beer_name_filter_true():
     query = make_test_inventory_query("single_positive_quantity.csv")
-    name_filter = make_test_name_filter("Bells Best Brown")
-    assert query.get_filtered_inventory(name_filter)[0].name == "Bells Best Brown"
+    filter_ds = FilterDS(name="Bells Best Brown")
+    assert query.get_filtered_inventory(filter_ds)[0].name == "Bells Best Brown"
 
 
 def test_one_beer_name_filter_false():
     query = make_test_inventory_query("single_positive_quantity.csv")
-    name_filter = make_test_name_filter("Guinness")
-    assert not query.get_filtered_inventory(name_filter)
+    filter_ds = FilterDS(name="Guinness")
+    assert not query.get_filtered_inventory(filter_ds)
 
 
 def test_multiple_beers_name_filter_true():
     query = make_test_inventory_query("three.csv")
-    name_filter = make_test_name_filter("Bells Best Brown")
-    assert len(query.get_filtered_inventory(name_filter)) == 1
+    filter_ds = FilterDS(name="Bells Best Brown")
+    assert len(query.get_filtered_inventory(filter_ds)) == 1
 
 
 def test_multiple_beers_name_filter_false():
     query = make_test_inventory_query("three.csv")
-    name_filter = make_test_name_filter("Guinness")
-    assert not query.get_filtered_inventory(name_filter)
+    filter_ds = FilterDS(name="Guinness")
+    assert not query.get_filtered_inventory(filter_ds)
