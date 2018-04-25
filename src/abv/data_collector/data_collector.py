@@ -3,8 +3,7 @@ import time
 import logging
 import datetime
 import requests
-from abv.file_location import FileLocation
-
+from abv.inventory_api.file_location import FileLocation
 
 
 def write_beer_inventory():

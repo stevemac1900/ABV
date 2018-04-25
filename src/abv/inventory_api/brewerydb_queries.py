@@ -1,6 +1,6 @@
-import requests
-import logging
 import os
+import logging
+import requests
 
 
 class BreweryDBQueries:
@@ -13,7 +13,7 @@ class BreweryDBQueries:
             else:
                 raise KeyError
 
-        except KeyError as e:
+        except KeyError:
             self.key = ''
 
     def get_beer_style(self, beer_name):
@@ -21,7 +21,8 @@ class BreweryDBQueries:
             if self.num_queries_today >= 390:
                 raise Exception
 
-            request = requests.get('http://api.brewerydb.com/v2/search?key=' + self.key + '&q=' + beer_name + '&type=beer')
+            request = requests.get('http://api.brewerydb.com/v2/search?key=' + self.key
+                                   + '&q=' + beer_name + '&type=beer')
             logging.info('The request was fetched successfully!')
             if self.is_unknown(request.json()):
                 return 'Unknown'
@@ -52,4 +53,3 @@ class BreweryDBQueries:
             return beer_json['data'][0]['style']['name']
 
         return beer_json['data'][0]['style']['shortName']
-    

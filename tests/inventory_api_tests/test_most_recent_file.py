@@ -2,7 +2,7 @@ import tempfile
 import os
 from shutil import copyfile
 import pytest
-from abv.most_recent_file import MostRecentFile
+from abv.inventory_api.most_recent_file import MostRecentFile
 
 
 

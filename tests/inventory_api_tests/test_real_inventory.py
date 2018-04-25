@@ -7,7 +7,7 @@ def inventory_has_proper_size_zero(size):
     tanczos_inventory = MostRecentFile().get_list_none()
     style_db = MockBreweryDBStoutTracked()
 
-    i = Inventory(tanczos_inventory,style_db)
+    i = Inventory(tanczos_inventory, style_db)
     assert size == len(i.get_historic_inventory())
 
 
@@ -49,6 +49,7 @@ def test_correct_style_from_one_beer():
     assert values[0].style == 'stout'
     assert values[0].name == 'BELLS BEST BROWN'
 
+
 def test_correct_style_from_three_beers():
     tanczos_inventory = MostRecentFile().get_list_three()
     style_db = MockBreweryDBStoutTracked()
@@ -58,12 +59,3 @@ def test_correct_style_from_three_beers():
 
     assert values[2].style == 'stout'
     assert values[2].name == 'GREAT LAKES OKTOBERFEST'
-
-
-
-
-
-
-
-
-
