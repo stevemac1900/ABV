@@ -6,7 +6,6 @@ import requests
 from abv.file_location import FileLocation
 
 
-
 def write_beer_inventory():
     beer_inventory = get_inventory()
     if beer_inventory != "":

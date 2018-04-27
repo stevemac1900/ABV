@@ -16,8 +16,8 @@ class InventoryQueries:
         self.inventory = inventory
 
     def get_available_inventory(self):
-        return [keep_requested_attributes(beer) for beer in self.inventory.get_historic_inventory_strings()
-                if beer['quantity'] > 0]
+        return [keep_requested_attributes(beer) for beer in
+                self.inventory.get_historic_inventory_strings() if beer['quantity'] > 0]
 
     def get_filtered_inventory(self, filter_ds):
         beer_filter = build(filter_ds)

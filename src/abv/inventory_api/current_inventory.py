@@ -5,7 +5,7 @@ from tests.inventory_api_tests.mock_brewery_db import MockBreweryDBStoutTracked
 
 
 class Inventory:
-    def __init__(self,tanczos_inventory,style_db):
+    def __init__(self, tanczos_inventory, style_db):
 
         self.inventory = []
 

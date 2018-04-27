@@ -35,4 +35,3 @@ class Inventory:
         for beer in self.inventory:
             beer_inventory.append(make_beer(beer))
         return beer_inventory
-

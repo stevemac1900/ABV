@@ -9,6 +9,7 @@ class StyleCache:
             lines = infile.readlines()[1:]
             for line in lines:
                 line = line.strip()
+                line = line.replace('"', '')
                 beer_data = line.split(',')
                 self.cache_dict[beer_data[0]] = beer_data[1]
 
