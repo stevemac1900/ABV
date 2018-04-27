@@ -23,7 +23,7 @@ def test_many_items():
 
 def test_load_numeric_fields():
     i = Inventory(BASE_DIR + 'single.csv')
-    values = i.get_historic_inventory()[0]
+    values = i.get_historic_inventory_strings()[0]
     assert pytest.approx(0) == values['quantity']
     assert pytest.approx(182.99) == values['price']
     assert pytest.approx(182.99) == values['case_price']
@@ -32,7 +32,7 @@ def test_load_numeric_fields():
 
 def test_load_convert_case():
     i = Inventory(BASE_DIR + 'single.csv')
-    values = i.get_historic_inventory()[0]
+    values = i.get_historic_inventory_strings()[0]
     assert values['name'] == 'Bells Best Brown'
     assert values['size'] == '1/2 Keg'
     assert values['category'] == 'Craft'

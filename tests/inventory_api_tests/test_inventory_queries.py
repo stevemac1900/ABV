@@ -1,12 +1,14 @@
 from abv.inventory_api.inventory_queries import InventoryQueries
 from abv.inventory_api.inventory import Inventory
 from abv.inventory_api.filter_factory import build
+from abv.inventory_api.style_db import StyleDB
 from abv.inventory_api.filter_ds import FilterDS
 BASE_DIR = "tests/sample_csv_files/"
 
 
 def make_test_inventory_query(test_file):
     test_file = test_file
+    style_db = StyleDB()
     inventory = Inventory(BASE_DIR + test_file)
     return InventoryQueries(inventory)
 
