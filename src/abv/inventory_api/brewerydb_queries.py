@@ -48,12 +48,7 @@ def is_unknown(beer_json):
 def style_name(beer_json):
     if 'shortName' not in beer_json['data'][0]['style']:
         return beer_json['data'][0]['style']['name']
-
-<<<<<<< HEAD
-        return beer_json['data'][0]['style']['shortName']
-=======
     short_name = beer_json['data'][0]['style']['shortName']
     if len(short_name) == 0:
         return beer_json['data'][0]['style']['name']
     return beer_json['data'][0]['style']['shortName']
->>>>>>> 24e6b21932e2bbde75d0c606e3c3b20fd6f3623e
