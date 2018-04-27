@@ -24,32 +24,32 @@ class BreweryDBQueries:
             request = requests.get('http://api.brewerydb.com/v2/search?key=' + self.key
                                    + '&q=' + beer_name + '&type=beer')
             logging.info('The request was fetched successfully!')
-            if self.is_unknown(request.json()):
+            if is_unknown(request.json()):
                 return 'Unknown'
-            return self.style_name(request.json())
+            return style_name(request.json())
 
         except requests.RequestException as e:
             error_subclass = type(e).__name__
             logging.exception('The request could not be found: {}'.format(error_subclass))
             return ""
 
-    def is_unknown(self, beer_json):
-        if 'data' not in beer_json:
-            return True
-        if 'style' not in beer_json['data'][0]:
-            return True
-        beer_name = beer_json['data'][0]['style']['name']
-        if len(beer_name) == 0:
-            return True
 
-        return False
+def is_unknown(beer_json):
+    if 'data' not in beer_json:
+        return True
+    if 'style' not in beer_json['data'][0]:
+        return True
+    beer_name = beer_json['data'][0]['style']['name']
+    if len(beer_name) == 0:
+        return True
+    return False
 
-    def style_name(self, beer_json):
-        if 'shortName' not in beer_json['data'][0]['style']:
-            return beer_json['data'][0]['style']['name']
 
-        short_name = beer_json['data'][0]['style']['shortName']
-        if len(short_name) == 0:
-            return beer_json['data'][0]['style']['name']
+def style_name(beer_json):
+    if 'shortName' not in beer_json['data'][0]['style']:
+        return beer_json['data'][0]['style']['name']
 
-        return beer_json['data'][0]['style']['shortName']
+    short_name = beer_json['data'][0]['style']['shortName']
+    if len(short_name) == 0:
+        return beer_json['data'][0]['style']['name']
+    return beer_json['data'][0]['style']['shortName']

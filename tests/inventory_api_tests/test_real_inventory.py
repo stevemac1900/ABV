@@ -1,10 +1,10 @@
 from abv.inventory_api.current_inventory import Inventory
-from tests.inventory_api_tests.mock_mostrecentfile import MostRecentFile
+import tests.inventory_api_tests.mock_mostrecentfile as mostrecentfile
 from tests.inventory_api_tests.mock_brewery_db import MockBreweryDBStoutTracked
 
 
 def inventory_has_proper_size_zero(size):
-    tanczos_inventory = MostRecentFile().get_list_none()
+    tanczos_inventory = mostrecentfile.get_list_none()
     style_db = MockBreweryDBStoutTracked()
 
     i = Inventory(tanczos_inventory, style_db)
@@ -16,7 +16,7 @@ def test_empty_inventory():
 
 
 def inventory_has_proper_size_one(size):
-    tanczos_inventory = MostRecentFile().get_list_one()
+    tanczos_inventory = mostrecentfile.get_list_one()
     style_db = MockBreweryDBStoutTracked()
 
     i = Inventory(tanczos_inventory, style_db)
@@ -28,7 +28,7 @@ def test_single_list_inventory():
 
 
 def inventory_has_proper_size_three(size):
-    tanczos_inventory = MostRecentFile().get_list_three()
+    tanczos_inventory = mostrecentfile.get_list_three()
     style_db = MockBreweryDBStoutTracked()
 
     i = Inventory(tanczos_inventory, style_db)
@@ -40,7 +40,7 @@ def test_many_items():
 
 
 def test_correct_style_from_one_beer():
-    tanczos_inventory = MostRecentFile().get_list_one()
+    tanczos_inventory = mostrecentfile.get_list_one()
     style_db = MockBreweryDBStoutTracked()
 
     i = Inventory(tanczos_inventory, style_db)
@@ -51,7 +51,7 @@ def test_correct_style_from_one_beer():
 
 
 def test_correct_style_from_three_beers():
-    tanczos_inventory = MostRecentFile().get_list_three()
+    tanczos_inventory = mostrecentfile.get_list_three()
     style_db = MockBreweryDBStoutTracked()
 
     i = Inventory(tanczos_inventory, style_db)

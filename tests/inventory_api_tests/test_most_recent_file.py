@@ -5,7 +5,6 @@ import pytest
 from abv.inventory_api.most_recent_file import MostRecentFile
 
 
-
 def test_chooses_most_recent_file():
     temp_dir = tempfile.mkdtemp()
     # pylint: disable=unused-variable
@@ -45,6 +44,7 @@ def test_file_single_line():
     test_iterator = iter(most_recent_file)
     with pytest.raises(StopIteration):
         test_iterator.__next__()
+
 
 def test_empty_directory():
     temp_dir = tempfile.mkdtemp()

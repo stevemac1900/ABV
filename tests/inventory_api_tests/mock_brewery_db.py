@@ -1,6 +1,4 @@
 # pylint: disable=unused-argument
-
-
 class MockDB:
     count = 0
 

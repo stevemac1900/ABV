@@ -14,7 +14,7 @@ def write_beer_inventory():
 
 def write_inventory(beer_inventory):
     file_location_object = FileLocation()
-    file_location = file_location_object.get_file_location()
+    file_location = file_location_object.save_location
     filename = os.path.join(file_location, str(datetime.datetime.now()).replace(' ', '_') + '.csv')
 
     try:

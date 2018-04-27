@@ -7,7 +7,7 @@ from abv.inventory_api import style_db, most_recent_file
 from abv.inventory_api.file_location import FileLocation
 
 
-app = Flask(__name__)
+APP = Flask(__name__)
 queries = None
 
 
@@ -20,7 +20,7 @@ def initialize_inventory():
     queries = InventoryQueries(inventory)
 
 
-@app.route('/current')
+@APP.route('/current')
 def get_current_inventory():
     keys = list(request.args.keys())
     for key in keys:
@@ -45,4 +45,4 @@ def get_current_inventory():
 
 if __name__ == "__main__":
     initialize_inventory()
-    app.run(host="0.0.0.0")
+    APP.run(host="0.0.0.0")
