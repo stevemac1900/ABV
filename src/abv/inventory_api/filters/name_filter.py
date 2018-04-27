@@ -5,6 +5,6 @@ class NameFilter:
         self.name = name
 
     def is_match(self, beer):
-        if beer.name != self.name:
+        if self.name not in beer.name:
             return False
         return self.subfilter.is_match(beer)

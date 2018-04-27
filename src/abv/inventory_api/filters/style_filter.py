@@ -9,6 +9,6 @@ class StyleFilter:
 
     def is_match(self, beer):
         "Tests if the beer has the same style as the filter."
-        if beer.style != self.style:
+        if self.style not in beer.style:
             return False
         return self.subfilter.is_match(beer)
