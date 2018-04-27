@@ -1,6 +1,4 @@
 # pylint: disable=unused-argument
-
-
 class MockDB:
     count = 0
 
@@ -26,7 +24,7 @@ class MockBreweryDBUnknownTracked:
 class MockBreweryDBStoutTracked:
     count = 0
 
-    def get_style(self,beer_name):
+    def get_style(self, beer_name):
         self.count += 1
         return 'stout'
 

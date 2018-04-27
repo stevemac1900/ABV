@@ -21,7 +21,7 @@ def initialize_inventory():
     QUERIES = InventoryQueries(inventory)
 
 
-@app.route('/current')
+@APP.route('/current')
 def get_current_inventory():
     keys = list(request.args.keys())
     for key in keys:
@@ -33,19 +33,21 @@ def get_current_inventory():
     style = request.args.get('style')
     availability = request.args.get('availability')
 
-    filter = FilterDS(name=name, size=size, style=style, availability=availability)
+    beer_filter = FilterDS(name=name, size=size, style=style, availability=availability)
     beers = []
+<<<<<<< HEAD
     filtered_inventory = QUERIES.get_filtered_inventory(filter)
+=======
+    filtered_inventory = queries.get_filtered_inventory(beer_filter)
+>>>>>>> 24e6b21932e2bbde75d0c606e3c3b20fd6f3623e
     if filtered_inventory:
         for beer in filtered_inventory:
             beers.append({'name': beer.name, 'size': beer.size, 'style': beer.style,
                           'quantity': beer.quantity, 'price': beer.price})
         return json.dumps(beers)
-
-    else:
-        return json.dumps([])
+    return json.dumps([])
 
 
 if __name__ == "__main__":
     initialize_inventory()
-    app.run(host="0.0.0.0")
+    APP.run(host="0.0.0.0")

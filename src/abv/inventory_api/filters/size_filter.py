@@ -4,7 +4,6 @@ class SizeFilter:
         self.subfilter = subfilter
         self.size = size
 
-
     def is_match(self, beer):
         if self.size not in beer.size:
             return False

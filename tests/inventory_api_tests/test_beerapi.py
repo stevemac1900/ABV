@@ -1,14 +1,14 @@
 from tests.inventory_api_tests.mock_inventory_queries import MockInventoryQueries
-from abv.inventory_api.beer import Beer
-import abv.inventory_api.beerapi as beerapi
 from tests.inventory_api_tests.mock_inventory_queries_saving import MockInventoryQueriesSaving
-from abv.file_location import FileLocation
+from abv.inventory_api.beer import Beer
+from abv.inventory_api.file_location import FileLocation
+import abv.inventory_api.beerapi as beerapi
 
-beerapi.app.testing = True
-app = beerapi.app.test_client()
 
-pabst = Beer(name='Pabst', size='12/12oz', style='lager', quantity='1', price='20')
-guinness = Beer(name='Guinness', size='12/12oz', style='stout', quantity='1', price='30')
+beerapi.APP.testing = True
+APP = beerapi.APP.test_client()
+PABST = Beer(name='Pabst', size='12/12oz', style='lager', quantity='1', price='20')
+GUINNESS = Beer(name='Guinness', size='12/12oz', style='stout', quantity='1', price='30')
 
 
 def test_empty_results():
@@ -28,6 +28,7 @@ def test_two_results():
     result = app.get('/current')
     assert eval(result.data)[0]['name'] == 'Pabst'
     assert eval(result.data)[1]['name'] == 'Guinness'
+
 
 def test_no_filter():
     saver = MockInventoryQueriesSaving()
@@ -51,7 +52,7 @@ def test_availability_filter():
     app.get('/current?name=Guinness&availability=2')
     assert saver.filter.name == 'Guinness'
     assert saver.filter.availability == '2'
-    assert saver.filter.style == None
+    assert saver.filter.style is None
 
 
 def test_style_filter():
