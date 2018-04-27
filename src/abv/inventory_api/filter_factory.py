@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 from abv.inventory_api.filters.size_filter import SizeFilter
 from abv.inventory_api.filters.name_filter import NameFilter
 from abv.inventory_api.filters.yes_filter import YesFilter

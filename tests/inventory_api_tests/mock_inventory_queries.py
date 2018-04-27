@@ -1,3 +1,4 @@
+# pylint: disable=unused-argument
 class MockInventoryQueries:
 
     def __init__(self, results):

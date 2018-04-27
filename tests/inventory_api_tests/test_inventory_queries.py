@@ -1,7 +1,7 @@
 from abv.inventory_api.inventory_queries import InventoryQueries
 from abv.inventory_api.inventory import Inventory
-from abv.inventory_api.filter_factory import build
 from abv.inventory_api.filter_ds import FilterDS
+
 BASE_DIR = "tests/sample_csv_files/"
 
 

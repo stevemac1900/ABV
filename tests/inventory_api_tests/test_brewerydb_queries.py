@@ -1,6 +1,6 @@
 import re
 import requests_mock
-from abv.inventory_api.brewerydb_queries import BreweryDBQueries
+import abv.inventory_api.brewerydb_queries as queries
 
 
 def verify(the_json, beer_name, expected):
@@ -8,7 +8,7 @@ def verify(the_json, beer_name, expected):
         brewery_db_url = re.compile('api.brewerydb.com')
         session.register_uri('GET', brewery_db_url, json=the_json)
 
-        b = BreweryDBQueries()
+        b = queries.BreweryDBQueries()
 
         style = b.get_beer_style(beer_name)
         assert style == expected
