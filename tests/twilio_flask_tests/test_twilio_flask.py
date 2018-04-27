@@ -1,7 +1,9 @@
+# pylint: disable=redefined-outer-name
 import re
 from pytest import fixture
 import requests_mock
-import src.abv.twilio_api.twilio_flask as twilio_flask
+import abv.twilio_api.twilio_flask as twilio_flask
+
 
 
 @fixture()
@@ -11,7 +13,6 @@ def app():
     return inner_app
 
 
-# pylint: disable=redefined-outer-name
 def test_bad_status_code(app):
     with requests_mock.Mocker() as m:
         m.register_uri('GET', re.compile('beerapi'), text='[]', status_code=404)
@@ -19,7 +20,6 @@ def test_bad_status_code(app):
         assert b'Sorry, I cannot handle your request. Please try again later!' in result.data
 
 
-# pylint: disable=redefined-outer-name
 def test_valid_twilio_format(app):
     with requests_mock.Mocker() as m:
         m.register_uri('GET', re.compile('beerapi'), text='[{"name":"foo"}, {"name":"foo"}]')
@@ -28,21 +28,20 @@ def test_valid_twilio_format(app):
         assert result.data.startswith(b'<?xml')
 
 
-# pylint: disable=redefined-outer-name
 def test_no_results(app):
     with requests_mock.Mocker() as m:
         m.register_uri('GET', re.compile('beerapi'), text='[]')
         result = app.get('/', data={'Body':'stout'})
         assert b'Sorry, no results for stout' in result.data
 
-# pylint: disable=redefined-outer-name
+
 def test_one_result(app):
     with requests_mock.Mocker() as m:
         m.register_uri('GET', re.compile('beerapi'), text='[{"name":"foo"}]')
         result = app.get('/', data={'Body': 'porter'})
         assert b'There is 1 beer with the style porter' in result.data
 
-# pylint: disable=redefined-outer-name
+
 def test_tw0_result(app):
     with requests_mock.Mocker() as m:
         m.register_uri('GET', re.compile('beerapi'), text='[{"name":"foo"}, {"name":"bar"}]')
@@ -51,4 +50,4 @@ def test_tw0_result(app):
 
 
 def test_count_beers():
-    assert twilio_flask.count_beers('[{}, {}]') == 2
+    assert twilio_flask.get_num_matching_beers('[{}, {}]') == 2

@@ -9,8 +9,7 @@ import requests
 APP = Flask(__name__)
 
 
-def count_beers(query_results):
-    "Returns the number of beers that match the user's request."
+def get_num_matching_beers(query_results):
     data = json.loads(query_results)
     return len(data)
 
@@ -20,13 +19,13 @@ def handle_sms():
     """This function provides the response for twilio test message requests."""
     style = request.form['Body']
     query_results = requests.get("http://beerapi/current?style={}".format(style))
-    #Handles any situation where an attempt to get a response failed.
+    # Handles any situation where an attempt to get a response failed.
     if query_results.status_code != 200:
         response = MessagingResponse()
         response.message("Sorry, I cannot handle your request. Please try again later!")
         return str(response)
 
-    count = count_beers(query_results.text)
+    count = get_num_matching_beers(query_results.text)
 
     response = MessagingResponse()
     if count == 0:
