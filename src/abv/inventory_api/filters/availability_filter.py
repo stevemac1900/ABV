@@ -6,6 +6,6 @@ class AvailabilityFilter:
 
     def is_match(self, beer):
         available = beer.quantity
-        if available <= 0 or available < self.quantity_requested:
+        if float(available) <= 0 or float(available) < float(self.quantity_requested):
             return False
         return self.subfilter.is_match(beer)
