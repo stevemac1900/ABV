@@ -5,6 +5,7 @@ import datetime
 import requests
 from abv.inventory_api.file_location import FileLocation
 
+
 def write_beer_inventory():
     beer_inventory = get_inventory()
     if beer_inventory != "":

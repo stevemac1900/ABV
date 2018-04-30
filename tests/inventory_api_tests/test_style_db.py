@@ -1,6 +1,6 @@
 from abv.inventory_api.style_db import StyleDB
-from tests.inventory_api_tests import mock_brewery_db
 from abv.inventory_api.style_cache import StyleCache
+from tests.inventory_api_tests import mock_brewery_db
 
 
 def test_cache_has_beer():
