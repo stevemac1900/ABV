@@ -2,7 +2,7 @@
 class MockDB:
     count = 0
 
-    def get_style(self, beer_name):
+    def get_beer_style(self, beer_name):
         self.count += 1
         if beer_name == 'Guinness':
             return 'stout'

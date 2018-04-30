@@ -12,19 +12,19 @@ GUINNESS = Beer(name='Guinness', size='12/12oz', style='stout', quantity='1', pr
 
 
 def test_empty_results():
-    beerapi.queries = MockInventoryQueries([])
+    beerapi.QUERIES = MockInventoryQueries([])
     result = APP.get('/current')
     assert result.data == b'[]'
 
 
 def test_single_result():
-    beerapi.queries = MockInventoryQueries([PABST])
+    beerapi.QUERIES = MockInventoryQueries([PABST])
     result = APP.get('/current')
     assert eval(result.data)[0]['name'] == 'Pabst'
 
 
 def test_two_results():
-    beerapi.queries = MockInventoryQueries([PABST, GUINNESS])
+    beerapi.QUERIES = MockInventoryQueries([PABST, GUINNESS])
     result = APP.get('/current')
     assert eval(result.data)[0]['name'] == 'Pabst'
     assert eval(result.data)[1]['name'] == 'Guinness'
@@ -32,7 +32,7 @@ def test_two_results():
 
 def test_no_filter():
     saver = MockInventoryQueriesSaving()
-    beerapi.queries = saver
+    beerapi.QUERIES = saver
     APP.get('/current')
     assert saver.filter.name is None
     assert saver.filter.style is None
@@ -40,15 +40,15 @@ def test_no_filter():
 
 def test_name_filter():
     saver = MockInventoryQueriesSaving()
-    beerapi.queries = saver
+    beerapi.QUERIES = saver
     APP.get('/current?name=Guinness')
-    assert beerapi.queries.filter.name == 'Guinness'
+    assert beerapi.QUERIES.filter.name == 'Guinness'
     assert saver.filter.style is None
 
 
 def test_availability_filter():
     saver = MockInventoryQueriesSaving()
-    beerapi.queries = saver
+    beerapi.QUERIES = saver
     APP.get('/current?name=Guinness&availability=2')
     assert saver.filter.name == 'Guinness'
     assert saver.filter.availability == '2'
@@ -57,7 +57,7 @@ def test_availability_filter():
 
 def test_style_filter():
     saver = MockInventoryQueriesSaving()
-    beerapi.queries = saver
+    beerapi.QUERIES = saver
     APP.get('/current?name=Guinness&availability=2&style=stout')
     assert saver.filter.name == 'Guinness'
     assert saver.filter.availability == '2'
@@ -67,7 +67,7 @@ def test_style_filter():
 
 def test_size_filter():
     saver = MockInventoryQueriesSaving()
-    beerapi.queries = saver
+    beerapi.QUERIES = saver
     APP.get('/current?name=Guinness&availability=2&style=stout&size=12/12OZ')
     assert saver.filter.name == 'Guinness'
     assert saver.filter.availability == '2'
@@ -77,21 +77,21 @@ def test_size_filter():
 
 def test_repeat_params():
     saver = MockInventoryQueriesSaving()
-    beerapi.queries = saver
+    beerapi.QUERIES = saver
     APP.get('/current?name=Guinness&name=Pabst')
     assert saver.filter.name == 'Guinness'
 
 
 def test_bad_params():
     saver = MockInventoryQueriesSaving()
-    beerapi.queries = saver
+    beerapi.QUERIES = saver
     result = APP.get('/current?foo=bar')
     assert result.status_code == 400
 
 
 def test_bad_and_good_params():
     saver = MockInventoryQueriesSaving()
-    beerapi.queries = saver
+    beerapi.QUERIES = saver
     result = APP.get('/current?name=Guinness&foo=bar')
     assert result.status_code == 400
 
@@ -99,4 +99,4 @@ def test_bad_and_good_params():
 def test_api_initialization():
     FileLocation.save_location = 'tests/sample_csv_files'
     beerapi.initialize_inventory()
-    assert beerapi.queries.inventory.get_historic_inventory()[0].name == 'BREW WORKS HOP EXPLOSION'
+    assert beerapi.QUERIES.inventory.get_historic_inventory()[0].name == 'BREW WORKS HOP EXPLOSION'

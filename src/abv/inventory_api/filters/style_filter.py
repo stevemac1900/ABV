@@ -7,6 +7,6 @@ class StyleFilter:
         self.style = style
 
     def is_match(self, beer):
-        if beer.style != self.style:
+        if self.style not in beer.style:
             return False
         return self.subfilter.is_match(beer)

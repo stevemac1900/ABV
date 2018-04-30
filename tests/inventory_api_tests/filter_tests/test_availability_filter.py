@@ -4,7 +4,7 @@ from abv.inventory_api.filters.yes_filter import YesFilter
 
 
 def make_test_beer(available):
-    return Beer("Guinness", "pint", "stout", 0, available)
+    return Beer("Guinness", "pint", "stout", available, 0)
 
 
 def get_test_filter(quantity_requested):

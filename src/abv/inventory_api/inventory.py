@@ -1,5 +1,5 @@
 import csv
-
+from abv.inventory_api.beer import Beer
 
 def convert_to_numeric(item):
     result = dict(item)
@@ -12,6 +12,8 @@ def convert_to_numeric(item):
     result['case_pack'] = float(result['case_pack'])
     return result
 
+def make_beer(beer):
+    return Beer(beer['name'], beer['size'], beer['category'], beer['price'], beer['quantity'])
 
 class Inventory:
 
@@ -23,5 +25,13 @@ class Inventory:
 
             self.inventory = [convert_to_numeric(item) for item in reader]
 
-    def get_historic_inventory(self):
+
+    def get_historic_inventory_strings(self):
         return self.inventory
+
+
+    def get_historic_inventory(self):
+        beer_inventory = []
+        for beer in self.inventory:
+            beer_inventory.append(make_beer(beer))
+        return beer_inventory

@@ -21,8 +21,8 @@ class BreweryDBQueries:
             if self.num_queries_today >= 390:
                 raise Exception
 
-            request = requests.get('http://api.brewerydb.com/v2/search?key=' + self.key
-                                   + '&q=' + beer_name + '&type=beer')
+            request = requests.get('http://api.brewerydb.com/v2/search?key=' + self.key +
+                                   '&q=' + beer_name + '&type=beer')
             logging.info('The request was fetched successfully!')
             if is_unknown(request.json()):
                 return 'Unknown'
@@ -48,7 +48,6 @@ def is_unknown(beer_json):
 def style_name(beer_json):
     if 'shortName' not in beer_json['data'][0]['style']:
         return beer_json['data'][0]['style']['name']
-
     short_name = beer_json['data'][0]['style']['shortName']
     if len(short_name) == 0:
         return beer_json['data'][0]['style']['name']
