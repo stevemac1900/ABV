@@ -31,8 +31,10 @@ def test_valid_twilio_format(app):
 def test_no_results(app):
     with requests_mock.Mocker() as m:
         m.register_uri('GET', re.compile('0.0.0.0:10000'), text='[]')
-        result = app.get('/', data={'Body':'stout'})
-        assert b'Sorry, no results for stout' in result.data
+        style = 'stout'
+        result = app.get('/', data={'Body': style})
+        expected = 'Sorry, no results for {}'.format(style)
+        assert bytes(expected, 'utf-8') in result.data
 
 
 def test_one_result(app):

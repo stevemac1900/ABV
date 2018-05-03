@@ -30,7 +30,7 @@ def handle_sms():
 
     response = MessagingResponse()
     if count == 0:
-        response.message("Sorry, no results for stout")
+        response.message("Sorry, no results for {}".format(style))
     elif count == 1:
         response.message("There is 1 beer with the style {}".format(style))
     else:
