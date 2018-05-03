@@ -46,4 +46,4 @@ def get_current_inventory():
 
 if __name__ == "__main__":
     initialize_inventory()
-    APP.run(host="0.0.0.0")
+    APP.run(host="0.0.0.0", port=10000)
